@@ -3,7 +3,20 @@
 {% block head %}
     {% stylesheets 'css/custom/program.less' filter='cssrewrite,lessphp' output='compiled/program.css' %}
   <link rel="stylesheet" href="{{ asset_url }}" xmlns="http://www.w3.org/1999/html"/>
+  <style type="text/css">
+    /* this are changes made to your original styles - if you keep the layout it is you should integrate them into your existing styles
+               and delete them here */
+    #program-middle #image {
+      position: relative;
+    }
+  </style>
+
+
     {% endstylesheets %}
+
+  <link href="/html5/Client/PocketCodePlayer/_startup/playerInterface.css" rel="stylesheet" />
+  <link href="/html5/Client/PocketCodePlayer/_startup/pocketCodePlayer.css" rel="stylesheet" />
+
 {% endblock %}
 
 {% block body %}
@@ -22,6 +35,12 @@
       <a id="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
         <img width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
       </a>
+      <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }});">
+        <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64">
+          <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z" />
+          <polygon class="pc-svgPlayerIconSymbol" points="34.662,32 22.934,44.066 27.438,48.55 43.629,32 27.438,15.45 22.934,19.934" />
+        </svg>
+      </button>
     </div>
     <div id="info">
       <h2>{{ "description"|trans({}, "catroweb") }}</h2>
@@ -156,7 +175,9 @@
 
 
 {% block js %}
+  <script src="/html5/Client/PocketCodePlayer/_startup/pocketCodePlayer.js"></script>
   <script src="{{ asset('js/custom/Program.js') }}"></script>
+
   <script>
     var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}',
       '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}','{{ asset('images/symbols/loading.gif') }}',
