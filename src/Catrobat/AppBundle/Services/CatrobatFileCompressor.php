@@ -23,8 +23,12 @@ class CatrobatFileCompressor
         $archive = new \ZipArchive();
         $filename = $archive_name.'.catrobat';
 
-        $archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE);
-
+        //$archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE);
+		if ($archive->open($destination. "\\" . $filename, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== TRUE) 
+		{
+			die ("An error occurred creating your ZIP file.");
+		}
+		
         $finder = new Finder();
         $finder->in($source);
 
