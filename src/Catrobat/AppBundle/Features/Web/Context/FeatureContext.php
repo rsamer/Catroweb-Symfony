@@ -3,6 +3,7 @@
 namespace Catrobat\AppBundle\Features\Web\Context;
 
 use Behat\Behat\Context\CustomSnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Entity\MediaPackage;
 use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
@@ -938,6 +939,69 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
     assertEquals(200, $code);
     assertEquals('application/zip', $content_type);
   }
+
+    /**
+     * @When /^I am on a programs details page$/
+     */
+    public function iAmOnAProgramsDetailsPage()
+    {
+        $this->visit("pocketcode/program/1");
+    }
+
+    /**
+     * @Then /^the javascript file "([^"]*)" should be included$/
+     */
+    public function theJavascriptFileShouldBeIncluded($path)
+    {
+        $scripts = $this->getSession()->getPage()->findAll('css','script[src="'.$path.'"]');
+        assertEquals(1,count($scripts));
+    }
+
+    /**
+     * @Then /^the javascript function "([^"]*)" should be available$/
+     */
+    public function theJavascriptFunctionShouldBeAvailable($name)
+    {
+        assertTrue($this->getSession()->evaluateScript("typeof ".$name." === 'function'"));
+    }
+
+    /**
+     * @Given /^I am on the details page of the program with id "([^"]*)"$/
+     */
+    public function iAmOnTheDetailsPageOfTheProgramWithId($id)
+    {
+        $this->visit("pocketcode/program/".$id);
+    }
+
+    /**
+     * @Given /^the player javascripts are loaded$/
+     */
+    public function thePlayerJavascriptsAreLoaded()
+    {
+        $this->getSession()->evaluateScript("launchProject = function(id,languag) {program_id=id;lang=languag;}");
+    }
+
+    /**
+     * @When /^the user clicks on the player icon$/
+     */
+    public function theUserClicksOnThePlayerIcon()
+    {
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', ".pc-startButton")
+            ->click();
+    }
+
+    /**
+     * @Then /^the javascript function "([^"]*)" should be called with parameters:$/
+     */
+    public function theJavascriptFunctionShouldBeCalledWithParameters($notInUse, TableNode $table)
+    {
+        $values = $table->getHash();
+        assertTrue($this->getSession()->evaluateScript("program_id === ".$values[0]['Value'].";"));
+        assertTrue($this->getSession()->evaluateScript("lang === ".$values[1]['Value'].";"));
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// Getter & Setter
