@@ -386,6 +386,39 @@ help:
         text4: 'Go to the help site and discuss with other users.'
         text5: 'Explore the world of the Pocket Code programs. Download and remix programs you like.'
         text6: 'Upload the program that is currently opened.'
+  howToInstall:
+        title: How To Install Games
+        linktext: How do I Install this game?
+        start: ''
+        step1:
+          title: 'Open settings menu'
+          detail:
+            text1: 'In the following tutorial we will show you how to install a game you have downloaded from our website. '
+            text2: 'The exact views might look different on your device.'
+            text3: 'Start by opening the settings menu of your device!'
+            imgtxt1: 'Tap the <a href="#">settings</a> icon on the pull down screen.'
+            imgtxt2: 'Tap the <a href="#">settings</a> icon in the apps menu.'
+        step2:
+          title: 'Allow unknown sources.'
+          detail:
+            text1: "In order to be able to install downloaded apps you have to allow 'unknown Sources'"
+            imgtxt1: Go to <a href="#">more</a>.
+            imgtxt2: Go to <a href="#">security</a>.
+            imgtxt3: Tick <a href="#">Unknown sources</a>.
+            imgtxt4_1: Tap <a href="#">OK</a>.
+            imgtxt4_2: After the installation you can untick this option to increase security.
+        step3:
+          title: Install the .apk
+          detail:
+            text1: 'Install the game from the file you downloaded.'
+            imgtxt1: 'Tap the <a href="#">downloads</a> icon in the apps menu.'
+            imgtxt2: 'Tap the <a href="#">Game .apk</a>.'
+            imgtxt3: 'Tap on <a href="#">Install</a>.'
+            imgtxt4: '<a href="#">Wait</a> for the Installation to complete.'
+        step4:
+          title: Start the app
+          detail:
+            text1: 'Play the game and have fun!'
   tutorialcards:
       title: "Tutorials"
       description1: "This tutorials show you how to use effective tricks in"

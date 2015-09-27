@@ -1,0 +1,138 @@
+{% extends ':Default:base.html.twig' %}
+
+{% block head %}
+    {% stylesheets 'css/custom/help.less' filter='cssrewrite,lessphp' output='compiled/help.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block body %}
+    <h1>{{ ("help.howToInstall.title")|trans({}, "catroweb") }}</h1>
+
+    <div class="content-container wizard">
+
+        <nav>
+            {{ knp_pagination_render(pagination) }}
+        </nav>
+
+        <div class="clear"></div>
+        <div class="title size-xxlarge" style="text-align: center;">#{{ page }}: {{ ("help.howToInstall.step"~page~".title")|trans({}, "catroweb") }}</div>
+
+        <div class="step-by-step-container size-large">
+            {% if(page == 1) %}
+                <div class="textBlock">
+                    {{ ("help.howToInstall.step"~page~".detail.text1")|trans({}, "catroweb") }}
+                </div>
+                <div class="textBlock bold">
+                    {{ ("help.howToInstall.step"~page~".detail.text2")|trans({}, "catroweb") }}
+                </div>
+                <div class="textBlock">
+                    {{ ("help.howToInstall.step"~page~".detail.text3")|trans({}, "catroweb") }}
+                </div>
+
+                <div class="table">
+                    <div class="row">
+                        <div class="cell">
+                            <img src="{{ asset('images/help/how_to_install/00a.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt1")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator">OR</div>
+                        <div class="cell">
+                            <img src="{{ asset('images/help/how_to_install/00b.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt2")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% elseif(page == 2) %}
+                <div class="textBlock">
+                    {{ ("help.howToInstall.step"~page~".detail.text1")|trans({}, "catroweb") }}
+                </div>
+
+                <div class="table">
+                    <div class="row">
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/01a.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt1")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/01b.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt2")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/01c.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt3")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/01d.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt4_1")|trans({}, "catroweb")|raw }}</p>
+                            <br>
+                            <p><b>{{ ("help.howToInstall.step"~page~".detail.imgtxt4_2")|trans({}, "catroweb") }}</b></p>
+                        </div>
+                    </div>
+                </div>
+            {% elseif(page == 3) %}
+                <div class="textBlock">
+                    {{ ("help.howToInstall.step"~page~".detail.text1")|trans({}, "catroweb") }}
+                </div>
+
+                <div class="table">
+                    <div class="row">
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/02a.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt1")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/02b.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt2")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/02c.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt3")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                        <div class="seperator"><div class="arrow right"></div></div>
+                        <div class="cell">
+                            <img class="tinyimg" src="{{ asset('images/help/how_to_install/02d.png') }}" />
+                            <p>{{ ("help.howToInstall.step"~page~".detail.imgtxt4")|trans({}, "catroweb")|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% elseif(page == 4) %}
+                <div class="textBlock">
+                    {{ ("help.howToInstall.step"~page~".detail.text1")|trans({}, "catroweb") }}
+                    <div class="table">
+                        <div class="row">
+                            <div class="cell">
+                                <img src="{{ asset('images/help/how_to_install/03a.png') }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div id="image-overlay"></div>
+    <div id="image-popup">
+        <div id="outer-container">
+            <div></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('js/custom/Help.js') }}"></script>
+    {#<script>#}
+    {#var help = new Help();#}
+    {#help.setImageModal("{{  asset('images/help/step_by_step/') }}");#}
+    {#</script>#}
+
+{% endblock %}
+

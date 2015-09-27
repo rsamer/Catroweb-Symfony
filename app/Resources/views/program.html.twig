@@ -158,7 +158,7 @@
 {% block js %}
   <script src="{{ asset('js/custom/Program.js') }}"></script>
   <script>
-    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}', '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}');
+    var program = new Program('{{ path('ci_status', { 'id' : program.id }) }}', '{{ path('ci_build', { 'id' : program.id }) }}', '{{ 'apk.preparing'|trans({}, "catroweb") }}','{{ 'apk.text'|trans({}, "catroweb") }}', '{{ asset('images/symbols/loading.gif') }}', '{{ ("help.howToInstall.linktext")|trans({}, "catroweb") }}');
     program.getApkStatus();
     program.createLinks();
     program.setReportListener({{ program.id }}, '{{ path('catrobat_api_report_program') }}');

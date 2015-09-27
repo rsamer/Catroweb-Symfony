@@ -101,6 +101,40 @@ class TutorialController extends Controller
   }
 
   /**
+   * @Route("/how-to-install/{page}", name="catrobat_how_to_install", defaults={"page" = 1}, requirements={"page":"\d+"})
+   * @Route("/howToInstall/{page}", name="F", defaults={"page" = 1}, requirements={"page":"\d+"})
+   * @Method({"GET"})
+   */
+  public function howToInstall($page)
+  {
+      $max_page = 4;
+
+      if ($page > $max_page) {
+          throw $this->createNotFoundException('Unable to find step.');
+      }
+
+      $paginator = $this->get('knp_paginator');
+      $steps = array();
+
+      for ($i = 1; $i <= $max_page; ++$i) {
+          $steps[] = $i;
+      }
+
+      $pagination = $paginator->paginate(
+          $steps,
+          $page, //current page
+          1/*limit per page*/
+      );
+
+      $pagination->setTemplate(':help:paginationStart1.html.twig');
+
+      return $this->get('templating')->renderResponse(':help:howToInstall.html.twig', array(
+          'page' => $page,
+          'pagination' => $pagination,
+      ));
+  }
+
+  /**
    * @Route("/tutorialcards/{page}", name="catrobat_web_tutorialcards", defaults={"page" = -1}, requirements={"page":"\d+"})
    * @Method({"GET"})
    */

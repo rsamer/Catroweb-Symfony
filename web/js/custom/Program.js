@@ -1,4 +1,4 @@
-var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif)
+var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_gif, howToInstall_text)
 {
     var self = this;
     
@@ -7,6 +7,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
     self.apk_preparing = apk_preparing;
     self.apk_text = apk_text;
     self.waiting_gif = waiting_gif;
+    self.howToInstall_text = howToInstall_text;
     
     self.getApkStatus = function()
     {
@@ -87,7 +88,7 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         popup_div.css({
             'position': 'fixed',
             'width': '320px',
-            'height': '250px',
+            'height': '300px',
             'background-color': '#05222a',
             'left': '50%',
             'top': '50%',
@@ -102,8 +103,9 @@ var Program = function(status_url, create_url, apk_preparing, apk_text, waiting_
         popup_div.append("<h2>" + self.apk_preparing + " <span class='blink-one'>.</span> <span class='blink-two'>.</span> <span class='blink-three'>.</span> </h2><br>");
         popup_div.append('<img class="pending-icon" src="' + waiting_gif + '">');
         popup_div.append("<p>" + self.apk_text + "</p>");
+        popup_div.append("<a href='../how-to-install' style='color: #FFF;'>" + self.howToInstall_text + "</a><br>");
 
-        var ok_button = '<button id="ok-button" class="btn btn-primary" style="min-width: 50%; margin-top: 2px">OK</button>';
+        var ok_button = '<button id="ok-button" class="btn btn-primary" style="min-width: 50%; margin-top: 20px">OK</button>';
         popup_div.append(ok_button);
 
         $('body').append(dark_background);
