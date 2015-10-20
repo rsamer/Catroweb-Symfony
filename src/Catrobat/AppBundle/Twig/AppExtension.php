@@ -5,8 +5,8 @@ namespace Catrobat\AppBundle\Twig;
 use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Services\MediaPackageFileRepository;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Intl\Intl;
 
 class AppExtension extends \Twig_Extension
 {
@@ -44,16 +44,23 @@ class AppExtension extends \Twig_Extension
 
     public function getLanguageOptions()
     {
+
+        return $this->getLanguageOptionsFromPath($this->translationPath);
+    }
+
+
+    public function getLanguageOptionsFromPath($path)
+    {
         $current_language = $this->request_stack->getCurrentRequest()->getLocale();
 
-        if (strpos($current_language, '_DE') !== false || strpos($current_language, 'US') !== false) {
+        if (strpos($current_language, '_DE') !== false || strpos($current_language, '_US') !== false) {
             $current_language = substr($current_language, 0, 2);
         }
 
         $list = array();
 
         $finder = new Finder();
-        $finder->files()->in($this->translationPath);
+        $finder->files()->in($path);
 
         $isSelectedLangugage = false;
 
@@ -62,7 +69,7 @@ class AppExtension extends \Twig_Extension
 
             $isSelectedLangugage = $current_language === $shortName;
 
-            if ($current_language === $shortName) {
+            if (strcmp($current_language, $shortName)) {
                 $isSelectedLangugage = true;
             }
 
@@ -71,7 +78,7 @@ class AppExtension extends \Twig_Extension
                 $list[] = array(
                     $shortName,
                     $locale,
-                    $current_language === $shortName
+                    strcmp($current_language, $shortName) === 0
                 );
             }
         }
@@ -79,7 +86,6 @@ class AppExtension extends \Twig_Extension
         if (!$isSelectedLangugage) {
             $list = $this->setSelectedLanguage($list, $current_language);
         }
-
         return $list;
     }
 
