@@ -16,7 +16,7 @@
   <link href="/html5/player/playerInterface.css" rel="stylesheet" />
   {#only for now, its not in the release#}
 
-  <link href="/html5/player/pocketCodePlayer-min.css" rel="stylesheet" />
+  <link href="/html5/player/pocketCodePlayer.min.css" rel="stylesheet" />
 
 {% endblock %}
 
@@ -33,9 +33,7 @@
 
   <div id="program-middle">
     <div id="image" class="image-container">
-      <a id="url-image" href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
         <img width="300" height="300" id="screenshot" src="{{ asset(program_details.screenshotBig) }}">
-      </a>
       <button class="pc-startButton" onclick="javascript: launchProject({{ program.id }}, '{{ app.request.locale }}');">
         <svg preserveAspectRatio="xMidYMin meet" viewBox="0,0,64,64">
           <path class="pc-svgPlayerIconBorder" d="M32,1C14.88,1,1,14.88,1,31.999C1,49.12,14.88,63,32,63s31-13.88,31-31.001C63,14.88,49.12,1,32,1z M32,56.979c-13.796,0-24.98-11.184-24.98-24.98c0-13.795,11.185-24.98,24.98-24.98s24.979,11.186,24.979,24.98 C56.979,45.796,45.796,56.979,32,56.979z" />
@@ -176,7 +174,7 @@
 
 
 {% block js %}
-  <script src="/html5/player/pocketCodePlayer-min.js"></script>
+  <script src="/html5/player/pocketCodePlayer.min.js"></script>
   <script src="{{ asset('js/custom/Program.js') }}"></script>
 
   <script>
