@@ -18,7 +18,7 @@ class LogsController extends CRUDController
     public function listAction(Request $request = null)
     {
         $finder = new Finder();
-        $finder->files()->in(self::LOG_DIR)->name(self::LOG_PATTERN);
+        $finder->files()->depth(0)->in(self::LOG_DIR)->name(self::LOG_PATTERN);
         $finder->sortByName();
 
         foreach($finder as $file) {
@@ -27,6 +27,7 @@ class LogsController extends CRUDController
 
         for ($i = 0; $i < count($files); $i++ ) {
             $command = self::TAIL_COMMAND.self::LOG_DIR.$files[$i];
+
             $content[$i]= explode("\n",shell_exec($command));
         }
 
