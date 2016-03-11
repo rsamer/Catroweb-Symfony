@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tags")
+ * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\TagRepository")
  */
 class Tag
 {
