@@ -11,6 +11,7 @@ use Catrobat\AppBundle\Entity\UserManager;
 use Catrobat\AppBundle\Events\ProgramBeforeInsertEvent;
 use Catrobat\AppBundle\Events\ProgramInsertEvent;
 use Catrobat\AppBundle\Events\ProgramBeforePersistEvent;
+use Catrobat\AppBundle\Entity\TagRepository;
 
 class ProgramManager
 {
@@ -29,7 +30,9 @@ class ProgramManager
 
     protected $pagination;
 
-    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, EventDispatcherInterface $event_dispatcher)
+    protected $tag_repository;
+
+    public function __construct($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, EventDispatcherInterface $event_dispatcher)
     {
         $this->file_extractor = $file_extractor;
         $this->event_dispatcher = $event_dispatcher;
@@ -37,6 +40,7 @@ class ProgramManager
         $this->screenshot_repository = $screenshot_repository;
         $this->entity_manager = $entity_manager;
         $this->program_repository = $program_repository;
+        $this->tag_repository = $tag_repository;
     }
 
     public function addProgram(AddProgramRequest $request)
@@ -78,6 +82,7 @@ class ProgramManager
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
+        $this->addTags($program, $extracted_file);
 
         if ($request->getGamejam() != null)
         {
@@ -105,6 +110,24 @@ class ProgramManager
         $event = $this->event_dispatcher->dispatch('catrobat.program.successful.upload', new ProgramInsertEvent());
         
         return $program;
+    }
+
+    public function addTags($program, $extracted_file)
+    {
+        $tags = $extracted_file->getTags();
+        print_r($tags);
+
+
+        if(!empty($tags))
+        {
+            foreach($tags as $tag)
+            {
+                $db_tag = $this->tag_repository->getConstantTags("en");
+
+                print_r($db_tag);
+//                $program->addTag($db_tag);
+            }
+        }
     }
 
     public function findOneByNameAndUser($program_name, $user)

@@ -119,6 +119,7 @@ services:
             - "@screenshotrepository"
             - "@doctrine.orm.entity_manager"
             - "@programrepository"
+            - "@tagrepository"
             - "@event_dispatcher"
 
     migrationmanager:
