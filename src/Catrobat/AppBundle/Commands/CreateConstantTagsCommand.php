@@ -49,45 +49,45 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
         $tag4 = new Tag();
         $tag5 = new Tag();
 
-        $tag->setEn("Animation");
-        $tag->setDe("Animation");
-        $tag->setIt("Animation");
-        $tag->setFr("Animation");
+        $tag->setEn("Games");
+        $tag->setDe("Spiele");
+        $tag->setIt("I giochi");
+        $tag->setFr("Des jeux");
 
         $this->em->persist($tag);
 
-        $tag1->setEn("Games");
-        $tag1->setDe("Games");
-        $tag1->setIt("Games");
-        $tag1->setFr("Games");
+        $tag1->setEn("Animation");
+        $tag1->setDe("Animation");
+        $tag1->setIt("Animazione");
+        $tag1->setFr("Animation");
 
         $this->em->persist($tag1);
 
-        $tag2->setEn("Music");
-        $tag2->setDe("Music");
-        $tag2->setIt("Music");
-        $tag2->setFr("Music");
+        $tag2->setEn("Story");
+        $tag2->setDe("Geschichte");
+        $tag2->setIt("Storia");
+        $tag2->setFr("Récit");
 
         $this->em->persist($tag2);
 
-        $tag3->setEn("Art");
-        $tag3->setDe("Art");
-        $tag3->setIt("Art");
-        $tag3->setFr("Art");
+        $tag3->setEn("Music");
+        $tag3->setDe("Musik");
+        $tag3->setIt("Musica");
+        $tag3->setFr("La musique");
 
         $this->em->persist($tag3);
 
-        $tag4->setEn("Story");
-        $tag4->setDe("Story");
-        $tag4->setIt("Story");
-        $tag4->setFr("Story");
+        $tag4->setEn("Art");
+        $tag4->setDe("Kunst");
+        $tag4->setIt("Arte");
+        $tag4->setFr("Art");
 
         $this->em->persist($tag4);
 
         $tag5->setEn("Experimentel");
-        $tag5->setDe("Experimentel");
-        $tag5->setIt("Experimentel");
-        $tag5->setFr("Experimentel");
+        $tag5->setDe("Experimentell");
+        $tag5->setIt("Sperimentale");
+        $tag5->setFr("Expérimental");
 
         $this->em->persist($tag5);
 
