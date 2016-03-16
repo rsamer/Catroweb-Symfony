@@ -43,7 +43,7 @@ class ProgramManager
         $this->tag_repository = $tag_repository;
     }
 
-    public function addProgram(AddProgramRequest $request)
+    public function addProgram(AddProgramRequest $request, $language = null)
     {
         $file = $request->getProgramfile();
         
@@ -82,7 +82,7 @@ class ProgramManager
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
-        $this->addTags($program, $extracted_file);
+        $this->addTags($program, $extracted_file, $language);
 
         if ($request->getGamejam() != null)
         {
@@ -112,20 +112,15 @@ class ProgramManager
         return $program;
     }
 
-    public function addTags($program, $extracted_file)
+    public function addTags($program, $extracted_file, $language)
     {
         $tags = $extracted_file->getTags();
-        print_r($tags);
-
-
         if(!empty($tags))
         {
             foreach($tags as $tag)
             {
-                $db_tag = $this->tag_repository->getConstantTags("en");
-
-                print_r($db_tag);
-//                $program->addTag($db_tag);
+                $db_tag = $this->tag_repository->findOneBy(array($language => $tag));
+                $program->addTag($db_tag);
             }
         }
     }

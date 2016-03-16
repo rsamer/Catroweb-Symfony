@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Catrobat\AppBundle\Entity\Program;
+use Catrobat\AppBundle\Entity\Tag;
 use Behat\Behat\Tester\Exception\PendingException;
 use Catrobat\AppBundle\Services\CatrobatFileCompressor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -60,6 +61,14 @@ class SymfonySupport
     public function getProgramManger()
     {
         return $this->kernel->getContainer()->get('programmanager');
+    }
+
+    /**
+     * @return \Catrobat\AppBundle\Entity\TagRepository
+     */
+    public function getTagRepository()
+    {
+        return $this->kernel->getContainer()->get('tagrepository');
     }
     
     /**
@@ -222,6 +231,20 @@ class SymfonySupport
     
         return $user;
     }
+
+    public function insertTag($config)
+    {
+        $em = $this->getManager();
+        $tag = new Tag();
+
+        $tag->setEn($config['en']);
+        $tag->setDe($config['de']);
+
+        $em->persist($tag);
+        $em->flush();
+
+    }
+
     
     public function insertProgram($user, $config)
     {

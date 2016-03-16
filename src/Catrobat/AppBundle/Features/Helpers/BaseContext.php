@@ -90,6 +90,15 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
 
     /**
      *
+     * @return \Catrobat\AppBundle\Entity\TagRepository
+     */
+    public function getTagRepository()
+    {
+        return $this->symfony_support->getTagRepository();
+    }
+
+    /**
+     *
      * @return \Catrobat\AppBundle\Services\ProgramFileRepository
      */
     public function getFileRepository()
@@ -214,6 +223,11 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
     public function insertProgram($user, $config)
     {
         return $this->symfony_support->insertProgram($user, $config);
+    }
+
+    public function insertTag($config)
+    {
+        return $this->symfony_support->insertTag($config);
     }
 
     public function insertProgramDownloadStatistics($program, $config)

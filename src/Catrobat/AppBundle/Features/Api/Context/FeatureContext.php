@@ -301,6 +301,25 @@ class FeatureContext extends BaseContext
     }
 
     /**
+     * @Given /^there are tags:$/
+     */
+    public function thereAreTags(TableNode $table)
+    {
+        $tags = $table->getHash();
+
+        foreach($tags as $tag)
+        {
+            @$config = array(
+                'id' => $tag['id'],
+                'en' => $tag['en'],
+                'de' => $tag['de']
+            );
+            $this->insertTag($config);
+        }
+    }
+
+
+    /**
      * @Given /^following programs are featured:$/
      */
     public function followingProgramsAreFeatured(TableNode $table)
@@ -562,6 +581,17 @@ class FeatureContext extends BaseContext
         $this->files = array();
         $this->files[] = new UploadedFile($filepath, 'test.catrobat');
     }
+
+    /**
+     * @Given /^I have a valid Catrobat file with a tag$/
+     */
+    public function iHaveAValidCatrobatFileWithATag()
+    {
+        $filepath = self::FIXTUREDIR . 'GeneratedFixtures/program_with_tags.catrobat';
+        assertTrue(file_exists($filepath), 'File not found');
+        $this->files[] = new UploadedFile($filepath, 'program_with_tags.catrobat');
+    }
+
 
     /**
      * @Given /^I have a Catrobat file with an bad word in the description$/
@@ -1076,4 +1106,19 @@ class FeatureContext extends BaseContext
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
     }
+
+    /**
+     * @Then /^The program should be tagged$/
+     */
+    public function theProgramShouldBeTagged()
+    {
+        $program = $this->getProgramManger()->find(2);
+
+        $tags = $program->getTags();
+
+        assertCount(2,$tags, 'Too much or too less tags found!');
+        assertEquals(1, $tags[0]->getId(), "Not the right tag!");
+        assertEquals(2, $tags[1]->getId(), "Not the right tag!");
+    }
+
 }
