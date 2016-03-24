@@ -13,15 +13,11 @@ Feature: Upload a program with tag
       | 1  | Games     | Spiele      |
       | 2  | Story     | Geschichte  |
 
-
-  Scenario: program upload with tags
-    Given I have a parameter "username" with value "Catrobat"
-    And I have a parameter "token" with value "cccccccccc"
+  Scenario: new scenario
+    Given I have a valid Catrobat file with a tag
     And I have a parameter "language" with value "en"
-    And I have a valid Catrobat file with a tag
-    And I have a parameter "fileChecksum" with the md5checksum of "program_with_tags.catrobat"
-    When I POST these parameters to "/pocketcode/api/upload/upload.json"
-    Then The program should be tagged
+    When I upload the tagged program
+    Then The program should be tagged correctly in the database
 
 
      

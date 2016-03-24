@@ -217,6 +217,9 @@ class FeatureContext extends BaseContext
             case 'valid parameters':
                 $filename = 'base.catrobat';
                 break;
+            case 'tags':
+                $filename = 'program_with_tags.catrobat';
+                break;
             
             default:
                 throw new PendingException('No case defined for "' . $programattribute . '"');
@@ -1108,17 +1111,28 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @Then /^The program should be tagged$/
+     * @Then /^The program should be tagged correctly in the database$/
      */
-    public function theProgramShouldBeTagged()
+    public function theProgramShouldBeTaggedCorrectlyInTheDatabase()
     {
         $program = $this->getProgramManger()->find(2);
 
         $tags = $program->getTags();
 
-        assertCount(2,$tags, 'Too much or too less tags found!');
+        assertCount(2, $tags, 'Too much or too less tags found!');
         assertEquals(1, $tags[0]->getId(), "Not the right tag!");
         assertEquals(2, $tags[1]->getId(), "Not the right tag!");
+    }
+
+    /**
+     * @When /^I upload the tagged program$/
+     */
+    public function iUploadTheTaggedProgram()
+    {
+        $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
+        $this->request_parameters['username'] = "Catrobat";
+        $this->request_parameters['token'] = 'cccccccccc';
+        $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
     }
 
 }
