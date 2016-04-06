@@ -84,7 +84,7 @@ class CreateConstantTagsCommand extends ContainerAwareCommand
 
         $this->em->persist($tag4);
 
-        $tag5->setEn("Experimentel");
+        $tag5->setEn("Experimental");
         $tag5->setDe("Experimentell");
         $tag5->setIt("Sperimentale");
         $tag5->setFr("Expérimental");
