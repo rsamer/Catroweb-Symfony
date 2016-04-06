@@ -87,7 +87,7 @@ class UploadController
                 $user = $this->tokenstorage->getToken()->getUser();
                 $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $gamejam);
                 
-                $program = $this->programmanager->addProgram($add_program_request, $request->request->get('language'));
+                $program = $this->programmanager->addProgram($add_program_request, $request->request->get('deviceLanguage'));
                 $user->setUploadToken($this->tokengenerator->generateToken());
                 $this->usermanager->updateUser($user);
 
