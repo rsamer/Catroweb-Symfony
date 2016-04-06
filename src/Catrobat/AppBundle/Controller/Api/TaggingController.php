@@ -29,20 +29,24 @@ class TaggingController extends Controller
     {
         $tags_repo = $this->get('tagrepository');
 
-        $language = $request->query->get('language', 'en');
+        $em = $this->getDoctrine()->getManager();
+        $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+
         $tags = array();
+        $tags['statusCode'] = 200;
+        $tags['constantTags'] = array();
 
-        $tags['ConstantTags'] = array();
-
-
+        $language = $request->query->get('language', 'en');
+        if(!in_array($language, $metadata)) {
+            $language = 'en';
+            $tags['statusCode'] = 404;
+        }
         $results = $tags_repo->getConstantTags($language);
 
         foreach($results as $tag)
         {
-            array_push($tags['ConstantTags'], $tag[$language]);
+            array_push($tags['constantTags'], $tag[$language]);
         }
-
         return JsonResponse::create($tags);
     }
-
 }

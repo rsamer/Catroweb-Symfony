@@ -1,4 +1,4 @@
-@api
+@api @tag
 Feature: Upload a program with tag
 
   Background: 
@@ -13,7 +13,21 @@ Feature: Upload a program with tag
       | 1  | Games     | Spiele      |
       | 2  | Story     | Geschichte  |
 
-  Scenario: new scenario
+  Scenario: get tags before uploading
+    Given I want to upload a program
+    When I GET the tag list
+    Then I should get the json object:
+      """
+      {
+        "statusCode":200,
+        "constantTags":[
+                          "Games",
+                          "Story"
+                       ]
+      }
+      """
+
+  Scenario: upload a tagged program
     Given I have a valid Catrobat file with a tag
     And I have a parameter "language" with value "en"
     When I upload the tagged program

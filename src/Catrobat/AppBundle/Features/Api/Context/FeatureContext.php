@@ -1135,4 +1135,22 @@ class FeatureContext extends BaseContext
         $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
     }
 
+    /**
+     * @Given /^I want to upload a program$/
+     */
+    public function iWantToUploadAProgram(){}
+
+    /**
+     * @When /^I GET the tag list$/
+     */
+    public function iGetTheTagList()
+    {
+        $this->getClient()->request('GET', '/pocketcode/api/tags/getTags.json?language=de', array(
+            'HTTP_HOST' => $this->hostname,
+            'HTTPS' => $this->secure
+        ));
+    }
+
+
+
 }
