@@ -13,6 +13,23 @@ Feature: Upload a program with tag
       | 1  | Games     | Spiele      |
       | 2  | Story     | Geschichte  |
 
+
+#  Scenario: get all tags before upload
+#    Given I want to upload a program
+#    When I GET the tag list from
+#    Then I should get the json object:
+#
+#  Scenario: show random programs
+#    Given I have a parameter "limit" with value "2"
+#    And I have a parameter "offset" with value "0"
+#    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
+#    Then I should get 2 programs in random order:
+#      | Name      |
+#      | program 1 |
+#      | program 4 |
+
+
+
   Scenario: get tags before uploading
     Given I want to upload a program
     When I GET the tag list
@@ -33,5 +50,11 @@ Feature: Upload a program with tag
     When I upload the tagged program
     Then The program should be tagged correctly in the database
 
+
+#  Scenario: upload a tagged program
+#    Given I have a Catrobat file with tags "xxx"
+#    And I use the english app
+#    When I upload the tagged program
+#    Then The program should have the tag "xxx" in the database
 
      

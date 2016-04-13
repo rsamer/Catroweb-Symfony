@@ -78,6 +78,6 @@ services:
 
       catrowebadmin.create.constant.tags:
               class: Catrobat\AppBundle\Commands\CreateConstantTagsCommand
-              arguments: ["@doctrine.orm.entity_manager"]
+              arguments: ["@doctrine.orm.entity_manager", "@translator"]
               tags:
                 -  { name: console.command }

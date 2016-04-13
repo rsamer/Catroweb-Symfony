@@ -20,107 +20,68 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Translation\TranslatorInterface;
+use Catrobat\AppBundle\Entity\TagRepository;
 
 class CreateConstantTagsCommand extends ContainerAwareCommand
 {
 
     private $output;
+    private $translator;
+    private $tag_repository;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, TranslatorInterface $translator)
     {
         parent::__construct();
         $this->em = $em;
+        $this->translator = $translator;
     }
 
     protected function configure()
     {
         $this->setName('catrobat:create:tags')
-            ->setDescription('Creating constant tags !');
+            ->setDescription('Creating constant tags in supported languages');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
+        $this->tag_repository = $this->getContainer()->get('tagrepository');
+        $metadata = $this->em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
 
-        $tag = new Tag();
-        $tag1 = new Tag();
-        $tag2 = new Tag();
-        $tag3 = new Tag();
-        $tag4 = new Tag();
-        $tag5 = new Tag();
+        for($i = 1; $i <= 6; $i++ ) {
+            $tag = $this->tag_repository->find($i);
 
-        $tag->setEn("Games");
-        $tag->setDe("Spiele");
-        $tag->setIt("I giochi");
-        $tag->setFr("Des jeux");
+            if($tag != null) {
 
-        $this->em->persist($tag);
+                for($j = 1; $j < count($metadata); $j++) {
+                    $language = 'set'.$metadata[$j];
 
-        $tag1->setEn("Animation");
-        $tag1->setDe("Animation");
-        $tag1->setIt("Animazione");
-        $tag1->setFr("Animation");
+                    $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
 
-        $this->em->persist($tag1);
+                    $this->em->persist($tag);;
+                    $this->em->flush();
+                }
 
-        $tag2->setEn("Story");
-        $tag2->setDe("Geschichte");
-        $tag2->setIt("Storia");
-        $tag2->setFr("Récit");
+            } else {
 
-        $this->em->persist($tag2);
+                $tag = new Tag();
 
-        $tag3->setEn("Music");
-        $tag3->setDe("Musik");
-        $tag3->setIt("Musica");
-        $tag3->setFr("La musique");
+                for($j = 1; $j < count($metadata); $j++) {
+                    $language = 'set'.$metadata[$j];
+                    $tag->$language($this->trans('tags.constant.tag' . $i, $metadata[$j]));
+                }
+                $this->em->persist($tag);;
+                $this->em->flush();
 
-        $this->em->persist($tag3);
-
-        $tag4->setEn("Art");
-        $tag4->setDe("Kunst");
-        $tag4->setIt("Arte");
-        $tag4->setFr("Art");
-
-        $this->em->persist($tag4);
-
-        $tag5->setEn("Experimental");
-        $tag5->setDe("Experimentell");
-        $tag5->setIt("Sperimentale");
-        $tag5->setFr("Expérimental");
-
-        $this->em->persist($tag5);
-
-
-        $this->em->flush();
-
-        $this->writeln("Five basic tags added!");
-    }
-
-
-    private function executeSymfonyCommand($command, $args, $output)
-    {
-        $command = $this->getApplication()->find($command);
-        $args['command'] = $command;
-        $input = new ArrayInput($args);
-        $command->run($input, $output);
-    }
-
-    private function executeShellCommand($command, $description)
-    {
-        $this->write($description." ('".$command."') ... ");
-        $process = new Process($command);
-        $process->setTimeout(3600);
-        $process->run();
-        if ($process->isSuccessful()) {
-            $this->writeln('OK');
-
-            return true;
-        } else {
-            $this->writeln('failed!');
-
-            return false;
+            }
         }
+    }
+
+    private function trans($message, $locale)
+    {
+        $parameters = array();
+        return $this->translator->trans($message, $parameters, 'catroweb', $locale);
     }
 
     private function write($string)
