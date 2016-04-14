@@ -154,10 +154,35 @@ class DefaultController extends Controller
   }
 
   /**
+   * @Route("/report", name="report")
+   * @Method({"GET"})
+   */
+  public function reportCommentAction(Request $request)
+  {
+    $user = $this->getUser();
+    if (!$user) {
+      return new Response("log_in");
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+
+    if (!$comment) {
+      throw $this->createNotFoundException(
+        'No comment found for this id '.$_GET['CommentId']
+      );
+    }
+
+    $comment->setIsReported(true);
+
+    return new Response("Comment successfully reported!");
+  }
+
+  /**
    * @Route("/delete", name="delete")
    * @Method({"GET"})
    */
-  public  function deleteCommentAction(Request $request)
+  public function deleteCommentAction(Request $request)
   {
     $user = $this->getUser();
     if (!$user) {

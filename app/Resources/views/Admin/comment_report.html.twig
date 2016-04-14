@@ -1,0 +1,89 @@
+{% extends base_template %}
+
+{% block list_table %}
+
+    <style>
+        h3 {
+            margin-left: 20px;
+        }
+        p {
+            margin-left: 20px;
+        }
+        .mtable {
+            display:table;
+            margin-left: 20px;
+            margin-bottom: 30px;
+            width: 95%;
+        }
+        .lrow {
+            width: 150px;
+            line-height: 28px;
+            display: table-row;
+            float: left;
+            clear: both;
+        }
+        .rrow {
+            display: table-row;
+            float: left;
+            margin-bottom: 10px;
+            width: 500px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+
+    {#<div class="col-xs-12 col-md-12">
+        <div class="box box-primary">
+            <div class="box-body table-responsive no-padding">
+                <h3>Reported Comments</h3>
+                <p>Below you can see comments reported by users.</p>
+                <div id="comments-wrapper">
+                    {% for comment in program_details.comments|slice(0, 10) %}
+                        <div class = "single-comment">
+                            <div class = "avatar-wrapper">
+                                <div class = "img-avatar"></div>
+                                <div class = "usr-name">{{ comment.username }}</div>
+                                <div class = "date">{{ comment.uploadDate.format('Y-m-d') }}</div>
+                            </div>
+                            <button class="report-button" data-commentId="{{ comment.id }}">{{ 'programs.report'|trans({}, 'catroweb') }}</button>
+                            {% if  program_details.isAdmin  %}
+                                <button class="delete-button" data-commentId="{{ comment.id }}">{{ 'programs.delete'|trans({}, 'catroweb') }}</button>
+                            {% endif %}
+                            <p>{{ comment.text }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>#}
+
+    <script>
+        $('.btn').click(function() {
+            $('.resultBox').html("");
+
+            var username = $('.name').val();
+            var message = $('.msg').val();
+
+            $.ajax({
+                url: "send",
+                type: "get", //send it through get method
+                data:{Username: username, Message: message},
+                success: function(data) {
+                    if(data === "OK") {
+                        $('.resultBox').switchClass("error", "success");
+                    }
+                    else {
+                        $('.resultBox').switchClass("success", "error");
+                    }
+                    $('.resultBox').html(data);
+                    //Do Something
+                }});
+
+
+        });
+    </script>
+{% endblock %}
+
