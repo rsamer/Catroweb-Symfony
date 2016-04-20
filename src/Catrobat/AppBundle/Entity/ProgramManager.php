@@ -114,13 +114,21 @@ class ProgramManager
 
     public function addTags($program, $extracted_file, $language)
     {
+        $metadata = $this->entity_manager->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+
+        if(!in_array($language, $metadata)) {
+            $language = 'en';
+        }
+
         $tags = $extracted_file->getTags();
         if(!empty($tags))
         {
             foreach($tags as $tag)
             {
                 $db_tag = $this->tag_repository->findOneBy(array($language => $tag));
-                $program->addTag($db_tag);
+                if($db_tag != null) {
+                    $program->addTag($db_tag);
+                }
             }
         }
     }

@@ -46,7 +46,7 @@ Feature: Upload a program with tag
 
   Scenario: upload a tagged program
     Given I have a valid Catrobat file with a tag
-    And I have a parameter "language" with value "en"
+    And I have a parameter "deviceLanguage" with value "en"
     When I upload the tagged program
     Then The program should be tagged correctly in the database
 
