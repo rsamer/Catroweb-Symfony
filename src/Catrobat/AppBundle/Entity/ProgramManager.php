@@ -43,10 +43,10 @@ class ProgramManager
         $this->tag_repository = $tag_repository;
     }
 
-    public function addProgram(AddProgramRequest $request, $language = null)
+    public function addProgram(AddProgramRequest $request)
     {
         $file = $request->getProgramfile();
-        
+
         $extracted_file = $this->file_extractor->extract($file);
         try {
             $event = $this->event_dispatcher->dispatch('catrobat.program.before', new ProgramBeforeInsertEvent($extracted_file));
@@ -82,7 +82,7 @@ class ProgramManager
         $program->setApproved(false);
         $program->setUploadLanguage('en');
         $program->setUploadedAt(new \DateTime());
-        $this->addTags($program, $extracted_file, $language);
+        $this->addTags($program, $extracted_file, $request->getLanguage());
 
         if ($request->getGamejam() != null)
         {

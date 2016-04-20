@@ -36,7 +36,7 @@ class TaggingController extends Controller
         $tags['statusCode'] = 200;
         $tags['constantTags'] = array();
 
-        $language = $request->query->get('language', 'en');
+        $language = $request->query->get('language');
         if(!in_array($language, $metadata)) {
             $language = 'en';
             $tags['statusCode'] = 404;

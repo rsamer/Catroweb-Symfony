@@ -1141,16 +1141,20 @@ class FeatureContext extends BaseContext
     public function iWantToUploadAProgram(){}
 
     /**
-     * @When /^I GET the tag list$/
+     * @Given /^I have no parameters$/
      */
-    public function iGetTheTagList()
+    public function iHaveNoParameters(){}
+
+        /**
+     * @When /^I GET the tag list from "([^"]*)" with these parameters$/
+     */
+    public function iGetTheTagListFromWithTheseParameters($url)
     {
-        $this->getClient()->request('GET', '/pocketcode/api/tags/getTags.json?language=de', array(
+        $this->getClient()->request('GET', $url . '?' . http_build_query($this->request_parameters), array(), $this->files, array(
             'HTTP_HOST' => $this->hostname,
             'HTTPS' => $this->secure
         ));
     }
-
 
 
 }
