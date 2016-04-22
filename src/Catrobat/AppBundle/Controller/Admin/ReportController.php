@@ -18,6 +18,30 @@ class ReportController extends CRUDController
 {
   public function listAction(Request $request = null)
   {
-    return $this->render(':Admin:comment_report.html.twig');
+    $program_comments = $this->getDoctrine()
+      ->getRepository('AppBundle:UserComment')
+      ->findAll();
+
+    $program_details = array(
+      'comments' => $program_comments,
+      'commentsLength' =>  count($program_comments));
+
+    return $this->render(':Admin:comment_report.html.twig', array(
+      'program_details' => $program_details));
+  }
+
+  public function deleteCommentAction(Request $request = null)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+
+    if (!$comment) {
+      throw $this->createNotFoundException(
+        'No comment found for this id '.$_GET['CommentId']
+      );
+    }
+    $em->remove($comment);
+    $em->flush();
+    return new Response("ok");
   }
 }

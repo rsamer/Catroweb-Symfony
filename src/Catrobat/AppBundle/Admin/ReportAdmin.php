@@ -36,6 +36,7 @@ class ReportAdmin extends Admin
   protected function configureRoutes(RouteCollection $collection)
   {
     $collection->clearExcept(array('list'));
+    $collection->add('deleteComment');
   }
 
 

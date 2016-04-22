@@ -236,6 +236,7 @@ class DefaultController extends Controller
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgramId($_POST['ProgramId']);
     $temp_comment->setUploadDate(date_create());
+    $temp_comment->setIsReported(false);
 
     $em = $this->getDoctrine()->getManager();
     $em->persist($temp_comment);
