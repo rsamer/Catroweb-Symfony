@@ -365,6 +365,9 @@ class SymfonySupport
                 case 'url':
                     $properties->header->url = $value;
                     break;
+                case 'tags':
+                    $properties->header->tags = $value;
+                    break;
     
                 default:
                     throw new PendingException('unknown xml field '.$name);
@@ -377,7 +380,7 @@ class SymfonySupport
         return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
     }
     
-    public function upload($file, $user, $flavor = "pocketcode")
+    public function upload($file, $user, $flavor = "pocketcode", $request_param)
     {
         if ($user == null) {
             $user = $this->getDefaultUser();
@@ -391,6 +394,11 @@ class SymfonySupport
         $parameters['username'] = $user->getUsername();
         $parameters['token'] = $user->getUploadToken();
         $parameters['fileChecksum'] = md5_file($file->getPathname());
+
+        if ($request_param['deviceLanguage'] != null) {
+            $parameters['deviceLanguage'] = $request_param['deviceLanguage'];
+        }
+
         $client = $this->getClient();
         $client->request('POST', '/' . $flavor . '/api/upload/upload.json', $parameters, array($file));
         $response = $client->getResponse();

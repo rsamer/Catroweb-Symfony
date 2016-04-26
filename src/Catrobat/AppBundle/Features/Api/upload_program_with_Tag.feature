@@ -64,33 +64,26 @@ Feature: Upload a program with tag
       }
       """
 
-#  Scenario: upload a tagged program with tags Games and Story
-#    Given I have a Catrobat file with tags "Story,Art"
-#    And I use the "english" app
-#    When I upload the tagged program
-#    Then The program should be tagged with "Story,Art" in the database
+  Scenario: upload a tagged program with tags Games and Story on an english device
+    Given I have a program with "Games,Story" as tags
+    And I use the "english" app
+    When I upload this program
+    Then the program should be tagged with "Games,Story" in the database
 
+  Scenario: upload a tagged program with tags Geschichte and Musik on a german device
+    Given I have a program with "Geschichte,Musik" as tags
+    And I use the "german" app
+    When I upload this program
+    Then the program should be tagged with "Geschichte,Musik" in the database
 
-#  Scenario: show random programs
-#    Given I have a parameter "limit" with value "2"
-#    And I have a parameter "offset" with value "0"
-#    When I GET "/pocketcode/api/projects/randomPrograms.json" with these parameters
-#    Then I should get 2 programs in random order:
-#      | Name      |
-#      | program 1 |
-#      | program 4 |
+  Scenario: upload a tagged program with tags Music and Art on a device with no supported language
+    Given I have a program with "Music,Art" as tags
+    And I use the "unknownLangugae" app
+    When I upload this program
+    Then the program should be tagged with "Music,Art" in the database
 
-#  Scenario: upload a tagged program
-#    Given I have a valid Catrobat file with a tag
-#    And I have a parameter "deviceLanguage" with value "en"
-#    When I upload the tagged program
-#    Then The program should be tagged correctly in the database
-#
-
-#  Scenario: upload a tagged program
-#    Given I have a Catrobat file with tags "xxx"
-#    And I use the english app
-#    When I upload the tagged program
-#    Then The program should have the tag "xxx" in the database
-
-     
+  Scenario: upload a tagged program with unknown tags
+    Given I have a program with "Huhu,dontKnow" as tags
+    And I use the "english" app
+    When I upload this program
+    Then the program should not be tagged

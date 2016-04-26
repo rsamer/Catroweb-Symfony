@@ -240,9 +240,9 @@ class BaseContext implements KernelAwareContext, CustomSnippetAcceptingContext
         return $this->symfony_support->generateProgramFileWith($parameters);
     }
 
-    public function upload($file, $user, $flavor = 'pocketcode')
+    public function upload($file, $user, $flavor = 'pocketcode', $request_parameters = null)
     {
-        return $this->symfony_support->upload($file, $user, $flavor);
+        return $this->symfony_support->upload($file, $user, $flavor, $request_parameters);
     }
 
     protected function getTempCopy($path)

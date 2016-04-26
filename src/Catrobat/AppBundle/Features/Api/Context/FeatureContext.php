@@ -120,7 +120,7 @@ class FeatureContext extends BaseContext
     // //////////////////////////////////////////// Steps
     
     /**
-     * @Given /^I have a program with "([^"]*)" as (name|description)$/
+     * @Given /^I have a program with "([^"]*)" as (name|description|tags)$/
      */
     public function iHaveAProgramWithAsDescription($value, $header)
     {
@@ -130,11 +130,15 @@ class FeatureContext extends BaseContext
     }
 
     /**
-     * @When /^i upload this program$/
+     * @When /^I upload this program$/
      */
     public function iUploadThisProgram()
     {
-        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
+        if(array_key_exists('deviceLanguage', $this->request_parameters)) {
+            $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+        } else {
+            $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null);
+        }
     }
 
     /**
@@ -584,17 +588,6 @@ class FeatureContext extends BaseContext
         $this->files = array();
         $this->files[] = new UploadedFile($filepath, 'test.catrobat');
     }
-
-    /**
-     * @Given /^I have a valid Catrobat file with a tag$/
-     */
-    public function iHaveAValidCatrobatFileWithATag()
-    {
-        $filepath = self::FIXTUREDIR . 'GeneratedFixtures/program_with_tags.catrobat';
-        assertTrue(file_exists($filepath), 'File not found');
-        $this->files[] = new UploadedFile($filepath, 'program_with_tags.catrobat');
-    }
-
 
     /**
      * @Given /^I have a Catrobat file with an bad word in the description$/
@@ -1100,7 +1093,7 @@ class FeatureContext extends BaseContext
     {
         //echo 'Delete post with Facebook ID ' . $this->fb_post_id;
         
-        $program_manager = $this->getSymfonySupport()->getProgramManger();
+        $program_manager = $this->getProgramManger();
         $program = $program_manager->find($this->fb_post_program_id);
         assertEmpty($program->getFbPostId(), 'FB Post was not resetted');
         $fb_response = $this->getSymfonyService('facebook_post_service')->checkFacebookPostAvailable($this->fb_post_id);
@@ -1108,31 +1101,6 @@ class FeatureContext extends BaseContext
         $string = print_r($fb_response, true);
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
-    }
-
-    /**
-     * @Then /^The program should be tagged correctly in the database$/
-     */
-    public function theProgramShouldBeTaggedCorrectlyInTheDatabase()
-    {
-        $program = $this->getProgramManger()->find(2);
-
-        $tags = $program->getTags();
-
-        assertCount(2, $tags, 'Too much or too less tags found!');
-        assertEquals(1, $tags[0]->getId(), "Not the right tag!");
-        assertEquals(2, $tags[1]->getId(), "Not the right tag!");
-    }
-
-    /**
-     * @When /^I upload the tagged program$/
-     */
-    public function iUploadTheTaggedProgram()
-    {
-        $this->iHaveAParameterWithTheMdchecksumMyFile('fileChecksum');
-        $this->request_parameters['username'] = "Catrobat";
-        $this->request_parameters['token'] = 'cccccccccc';
-        $this->iPostTheseParametersTo('/pocketcode/api/upload/upload.json');
     }
 
     /**
@@ -1156,5 +1124,49 @@ class FeatureContext extends BaseContext
         ));
     }
 
+    /**
+     * @Given /^I use the "([^"]*)" app$/
+     */
+    public function iUseTheApp($language)
+    {
+
+        switch ($language) {
+            case 'english':
+                $deviceLanguage = 'en';
+                break;
+            case 'german':
+                $deviceLanguage = 'de';
+                break;
+            default:
+                $deviceLanguage = 'NotExisting';
+        }
+        
+        $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
+    }
+
+    /**
+     * @Then /^the program should be tagged with "([^"]*)" in the database$/
+     */
+    public function theProgramShouldBeTaggedWithInTheDatabase($arg1)
+    {
+        $program_tags = $this->getProgramManger()->find(2)->getTags();
+        $tags = explode(',',$arg1);
+        assertEquals(count($program_tags), count($tags), 'Too much or too less tags found!');
+
+        foreach ($program_tags as $program_tag) {
+            if (!(in_array($program_tag->getDe(), $tags) || in_array($program_tag->getEn(), $tags))) {
+                assertTrue(false, 'The tag is not found!');
+            }
+        }
+    }
+
+    /**
+     * @Then /^the program should not be tagged$/
+     */
+    public function theProgramShouldNotBeTagged()
+    {
+        $program_tags = $this->getProgramManger()->find(2)->getTags();
+        assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
+    }
 
 }

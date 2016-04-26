@@ -121,11 +121,13 @@ class ProgramManager
         }
 
         $tags = $extracted_file->getTags();
+
         if(!empty($tags))
         {
             foreach($tags as $tag)
             {
                 $db_tag = $this->tag_repository->findOneBy(array($language => $tag));
+
                 if($db_tag != null) {
                     $program->addTag($db_tag);
                 }
