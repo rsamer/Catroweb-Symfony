@@ -380,7 +380,7 @@ class SymfonySupport
         return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
     }
     
-    public function upload($file, $user, $flavor = "pocketcode", $request_param)
+    public function upload($file, $user, $flavor = "pocketcode", $request_param = null)
     {
         if ($user == null) {
             $user = $this->getDefaultUser();

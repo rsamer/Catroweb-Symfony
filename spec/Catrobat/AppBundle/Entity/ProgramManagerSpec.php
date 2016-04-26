@@ -2,9 +2,11 @@
 namespace spec\Catrobat\AppBundle\Entity;
 
 use Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Catrobat\AppBundle\Entity\GameJam;
+use Sonata\CoreBundle\Model\Metadata;
 
 class ProgramManagerSpec extends ObjectBehavior
 {
@@ -14,7 +16,8 @@ class ProgramManagerSpec extends ObjectBehavior
      * @param \Catrobat\AppBundle\Services\CatrobatFileExtractor $file_extractor            
      * @param \Catrobat\AppBundle\Services\ProgramFileRepository $file_repository            
      * @param \Catrobat\AppBundle\Services\ScreenshotRepository $screenshot_repository            
-     * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository            
+     * @param \Catrobat\AppBundle\Entity\ProgramRepository $program_repository
+     * @param \Catrobat\AppBundle\Entity\TagRepository $tag_repository
      * @param \Doctrine\ORM\EntityManager $entity_manager            
      * @param \Symfony\Component\HttpFoundation\File\File $file            
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher            
@@ -25,16 +28,19 @@ class ProgramManagerSpec extends ObjectBehavior
      * @param \Symfony\Component\EventDispatcher\Event $event            
      * @param \Catrobat\AppBundle\Exceptions\InvalidCatrobatFileException $validation_exception            
      */
-    public function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $event)
+    public function let($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher, $request, $file, $user, $extracted_file, $inserted_program, $event, $tag_repository)
     {
-        $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $event_dispatcher);
+        $this->beConstructedWith($file_extractor, $file_repository, $screenshot_repository, $entity_manager, $program_repository, $tag_repository, $event_dispatcher);
         $request->getProgramfile()->willReturn($file);
         $request->getUser()->willReturn($user);
         $request->getIp()->willReturn('127.0.0.1');
         $request->getGamejam()->willReturn(null);
+        $request->getLanguage()->willReturn('en');
         $file_extractor->extract($file)->willReturn($extracted_file);
         $inserted_program->getId()->willReturn(1);
         $event_dispatcher->dispatch(Argument::any(), Argument::any())->willReturnArgument(1);
+        $entity_manager->getClassMetadata(Argument::any())->willReturn(new Metadata(Argument::any()));
+        $entity_manager->getClassMetadata(Argument::any())->getFieldNames()->willReturn('id');
     }
 
     public function it_is_initializable()
