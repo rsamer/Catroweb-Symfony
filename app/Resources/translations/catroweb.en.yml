@@ -529,6 +529,9 @@ gamejam:
       But why not create your own!
       Take part in the #AliceGameJam 
 
+tag-text: Tags
+extenstion-text: Extensions
+
 tags:
   constant:
     tag1: Games

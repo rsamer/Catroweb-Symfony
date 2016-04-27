@@ -13,7 +13,7 @@ class AddProgramRequest
     private $gamejam;
     private $language;
 
-    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null, $language)
+    public function __construct(User $user, File $programfile, $ip = '127.0.0.1', $gamejam = null, $language = null)
     {
         $this->user = $user;
         $this->programfile = $programfile;
