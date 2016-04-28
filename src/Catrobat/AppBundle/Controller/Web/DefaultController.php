@@ -174,7 +174,7 @@ class DefaultController extends Controller
     }
 
     $comment->setIsReported(true);
-
+    $em->flush();
     return new Response("Comment successfully reported!");
   }
 

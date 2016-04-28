@@ -61,7 +61,7 @@ services:
               class: Catrobat\AppBundle\Admin\ReportAdmin
               tags:
                 - { name: sonata.admin, manager_type: orm, label: Reports }
-              arguments: [null, null, AppBundle:Admin\Report]
+              arguments: [null, Catrobat\AppBundle\Entity\UserComment, AppBundle:Admin\Report]
 
 
       catrowebadmin.block.featured.program:

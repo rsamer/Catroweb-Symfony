@@ -8,40 +8,56 @@
 
 namespace Catrobat\AppBundle\Controller\Admin;
 
-use Catrobat\AppBundle\Entity\User;
-use Catrobat\AppBundle\Entity\UserManager;
-use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-class ReportController extends CRUDController
+class ReportController extends Controller
 {
-  public function listAction(Request $request = null)
+
+
+
+  public function unreportAction(Request $request = null)
   {
-    $program_comments = $this->getDoctrine()
-      ->getRepository('AppBundle:UserComment')
-      ->findAll();
 
-    $program_details = array(
-      'comments' => $program_comments,
-      'commentsLength' =>  count($program_comments));
+    /* @var $object \Catrobat\AppBundle\Entity\UserComment */
+    $object = $this->admin->getSubject();
 
-    return $this->render(':Admin:comment_report.html.twig', array(
-      'program_details' => $program_details));
+    if (!$object) {
+      throw new NotFoundHttpException();
+    }
+
+    $object->setIsReported(FALSE);
+    $this->admin->update($object);
+
+    $this->addFlash('sonata_flash_success', 'Report '.$object->getId().' removed from list' );
+
+    return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
   public function deleteCommentAction(Request $request = null)
   {
+    /* @var $object \Catrobat\AppBundle\Entity\UserComment */
+    $object = $this->admin->getSubject();
+
+    if (!$object) {
+      throw new NotFoundHttpException();
+    }
     $em = $this->getDoctrine()->getManager();
-    $comment = $em->getRepository('AppBundle:UserComment')->find($_GET['CommentId']);
+    $comment = $em->getRepository('AppBundle:UserComment')->find($object->getId());
 
     if (!$comment) {
       throw $this->createNotFoundException(
-        'No comment found for this id '.$_GET['CommentId']
-      );
+      'No comment found for this id '.$object->getId());
     }
     $em->remove($comment);
     $em->flush();
-    return new Response("ok");
+    $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' deleted');
+    return new RedirectResponse($this->admin->generateUrl('list'));
   }
+
+
+
+
+
 }

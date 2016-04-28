@@ -19,9 +19,17 @@ class ReportAdmin extends Admin
   protected $baseRouteName = 'admin_report';
   protected $baseRoutePattern = 'report';
 
-  protected function configureFormFields(FormMapper $formMapper)
+
+  public function createQuery($context = 'list')
   {
+    $query = parent::createQuery($context);
+    $query->andWhere(
+      $query->expr()->eq($query->getRootAlias().'.isReported', $query->expr()->literal(true))
+    );
+    return $query;
   }
+
+
 
   // Fields to be shown on filter forms
   protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -31,12 +39,25 @@ class ReportAdmin extends Admin
   // Fields to be shown on lists
   protected function configureListFields(ListMapper $listMapper)
   {
+    $listMapper
+      ->add('id')
+      ->add('programId')
+      ->add('userId')
+      ->add('uploadDate')
+      ->add('text')
+      ->add('username')
+      ->add('_action', 'actions', array('actions' => array(
+        'delete' => array('template' => ':CRUD:list__action_delete_comment.html.twig'),
+        'unreport' => array('template' => ':CRUD:list__action_unreport.html.twig'),
+      )))
+    ;
   }
+
 
   protected function configureRoutes(RouteCollection $collection)
   {
-    $collection->clearExcept(array('list'));
     $collection->add('deleteComment');
+    $collection->add('unreport');
   }
 
 
