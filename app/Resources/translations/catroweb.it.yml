@@ -30,7 +30,7 @@ programs:
     viewed: Il più visto
     downloaded: Il più scaricato
   random: Programmi a caso
-  related: Related Programs
+  related: Programmi correlati
   downloads: '%downloads% download'
   sample: Programmi di esempio
   views: '%views% visualizzazioni'
@@ -48,6 +48,10 @@ programs:
   updateAppText: "Per poter scaricare questo programma, è necessario aggiornare l'applicazione alla versione più recente."
   btnClosePopup: Ok
   checkout_this_program: Fai il check-out questo di programma Catrobat
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Eliminare
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -103,6 +107,10 @@ licenseToPlay:
     item1: condividi le tue torte insieme alle ricette
     item2: dai credito a chi ti ha ispirato
   version: Versione 1.1, 2 Aprile 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Termini di utilizzo
   headline: Benvenuti nella comunità di Catrobat!
@@ -144,10 +152,8 @@ help:
     title: Introduzione passo per passo
     start: 'Posizione iniziale:'
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      Puoi creare il primo programma, una cartolina interattiva utilizzando i video tutorial che seguono. Devi solo seguire le istruzioni. Durante la creazione della cartolina, vengono fornite le nozioni di base di Pocket Code da applicare in nuovi progetti.
+      Dopo questi video, avrete maggiori nozioni per creare progetti personali con Pocket Code.
     step1:
       title: Crea un nuovo programma
       detail:
@@ -226,7 +232,7 @@ help:
         text2: "Vai indietro di una schermata alla pagina iniziale del tuo oggetto. Da qui puoi gestire gli script ma anche gli aspetti e i suoni associati all'oggetto. Da qui puoi rinominare, copiare, aggiugere o eliminare aspetti e suoni."
         text3: Se premi ancora sul pusante indietro di Android vai ad una schermata con tutti gli oggetti e lo sfondo.
     step10:
-      title: Cambiare lo sfondo
+      title: Cambia lo sfondo
       description: Questa è una panoramica di tutti gli oggetti e dello sfondo associati ad un singolo programma.
       detail:
         text1: Lo sfondo è come un qualsiasi oggetto, ma puoi avere solo uno sfondo.
@@ -511,11 +517,13 @@ gamejam:
     header: fai attenzione
     subheader: È possibile inviare solo programmi originali, creati da sé
     text: 'Ma perché non crearne uno personale! Prendi parte ad #AliceGameJam'
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Giochi
     tag2: Animazione in movimento
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag3: Storia
+    tag4: Musica
+    tag5: Arte
+    tag6: Sperimentale

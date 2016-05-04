@@ -48,6 +48,10 @@ programs:
   updateAppText: اس پروگرام کو ڈاؤن لوڈ کرنے کے لئے اپنے پروگرام کو اپ ڈیٹ کریں.
   btnClosePopup: ٹھیک ہے
   checkout_this_program: اس کیٹروبیٹ پروگرام کو چیک کریں
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: حذف کریں
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -103,6 +107,10 @@ licenseToPlay:
     item1: اپنے کیک بمع ترکیب دوسروں کے ساتھ شریک کریں
     item2: جو لوگ آپ کی حوصلہ افزائی کریں اُن کو اعزاز دیں
   version: ورژن 1.1, 2 اپریل 2013 ء
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: استعمال کی شرائط
   headline: کاٹروبٹ گروہ میں خوش آمدید!
@@ -501,6 +509,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: کھیل

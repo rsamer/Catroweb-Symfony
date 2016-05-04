@@ -30,7 +30,7 @@ programs:
     viewed: Mais vistos
     downloaded: Mais baixados
   random: Programas Aleatórios
-  related: Related Programs
+  related: Programas Relacionados
   downloads: '%downloads% downloads'
   sample: Exemplos de programas
   views: '%views% visualizações'
@@ -48,6 +48,10 @@ programs:
   updateAppText: Por favor, atualize o seu aplicativo para a versão mais recente para poder baixar este programa.
   btnClosePopup: Ok
   checkout_this_program: Confira este programa do Catrobat
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Apagar
 passwordRecovery:
   subject: Sua Recuperação de Senha do Catrobat
   message: |
@@ -99,6 +103,10 @@ licenseToPlay:
     item1: compartilhar seus bolos juntamente com a receita
     item2: dar crédito a quem te inspirou
   version: Versão 1.1, 2 de abril de 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Termos de Uso
   headline: Bem-vindo à comunidade Catrobat!
@@ -140,10 +148,10 @@ help:
     title: Introdução passo a passo
     start: 'Posição inicial:'
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      Aqui você pode criar seu primeiro programa, um cartão postal interativo, seguindo o passo a passo apresentado nos vídeos a seguir.
+      Você deve seguir as instruções que lhe serão dadas.
+      Durante a criação do cartão postal, os conhecimentos básicos em Pocket Code, que você precisará nos seus projetos futuros, serão cobertos.
+      Após os vídeos passo a passo, as demais atividades te darão mais liberdade para criar seus próprios projetos do Pocket Code.
     step1:
       title: Fazer um novo programa
       detail:
@@ -497,11 +505,13 @@ gamejam:
     text: |
       Mas por que não criar o seu próprio programa?!
       Faça parte do #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Jogos
     tag2: Animação
-    tag3: Story
-    tag4: Music
-    tag5: Art
+    tag3: História
+    tag4: Música
+    tag5: Arte
     tag6: Experimental

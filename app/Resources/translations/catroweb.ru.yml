@@ -48,6 +48,10 @@ programs:
   updateAppText: Пожалуйста, обновите приложение до последней версии, чтобы скачать эту программу.
   btnClosePopup: Ок
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Удалить
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
@@ -100,6 +104,10 @@ licenseToPlay:
     item1: Делитесь рецептами ваших пирогов
     item2: Отдайте тем, кто вдохновил вас
   version: Версия 1.1, 2 Апреля 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Условия использования
   headline: Добро пожаловать в сообщество Catrobat!
@@ -498,9 +506,11 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
-    tag1: Games
+    tag1: Game
     tag2: Animation
     tag3: Story
     tag4: Music

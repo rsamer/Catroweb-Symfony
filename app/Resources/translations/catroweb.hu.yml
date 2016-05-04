@@ -48,6 +48,10 @@ programs:
   updateAppText: A program letöltéséhez frissítse az appot a legújabb verzióra.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Törlés
 passwordRecovery:
   subject: Catrobat jelszó emlékeztető
   message: 'Kedves %username%. Jelszó emlékeztetőt kértél a %appplication_url% alkalmazáshoz, mert elfelejtetted a jelszavad. Amennyiben nem te kezdeményezted a jelszó emlékeztető küldését, kérlek hagyd ezt az üzenetet figyelmen kívül. Az üzenet 24 órán belül lejár. A jelszavad frissítéséhez látogasd meg a következő oldalt: %confirmationUrl% Felhasználóneveddel és jelszavaddal elérheted a %appplication_url% közösséget. Ehhez látogasd meg a következő oldalt: %loginPage% Profil adataid módosításához használd: %profilePage% Best regards, A Catrobat Csapat.'
@@ -86,6 +90,10 @@ licenseToPlay:
     item1: oszd meg a süteményeket és azok receptjeit
     item2: ismerd el azokat, akik inspiráltak
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Felhasználási feltételek
   headline: Üdvözlünk a Catrobat Közösségben!
@@ -484,6 +492,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Játékok

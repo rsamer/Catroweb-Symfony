@@ -48,6 +48,10 @@ programs:
   updateAppText: لطفا اپلیکیشن خود را به جدیدترین نسخه به روز رسانی کن تا قادر باشی این برنامه را دانلود کنی.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: حذف
 passwordRecovery:
   subject: 'بازیابی رمز عبورت در "کت ربات"'
   message: |
@@ -98,6 +102,10 @@ licenseToPlay:
     item1: کیک هایت را همراه با دستورپخت آنها به اشتراک بگذار
     item2: دادن اعتبار به کسانی که الهامبخش تو بوده اند
   version: نسخهٔ 1.1 2 آوریل 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: شرایط استفاده
   headline: 'به انجمن "کت ربات" خوش آمدید!'
@@ -499,6 +507,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: بازی‌ها

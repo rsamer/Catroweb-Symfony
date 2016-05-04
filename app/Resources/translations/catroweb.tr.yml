@@ -48,6 +48,10 @@ programs:
   updateAppText: Lütfen programinizi yeni sürümüyle güncelleştirin.
   btnClosePopup: Tamam
   checkout_this_program: Bu Catrobat programına gözat
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Sil
 passwordRecovery:
   subject: Catrobat şifre kurtarma
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: Sizinde kendi pastanızı tarifi ile paylaşmanızı
     item2: ve ilhamı kimden aldığınızı belirterek o kişinin hakkını vermenizi
   version: Sürüm 1.1, 2 Nisan 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Kullanım Şartları
   headline: Welcome to the Catrobat Community!
@@ -498,6 +506,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Oyunlar

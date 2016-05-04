@@ -48,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: ختم ڪيو
 passwordRecovery:
   subject: اوهان جي ڪيٽروبيٽ پاسورڊ جي واپسي
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: پنهنجو ڪيڪ بمع ترڪيب ونڊيو
     item2: انهن کي مڃتا ڏيو، جن توهان کي اتساهيو
   version: مسودو 1.1، اپريل 2، 2013ع
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: استعمال جا شرط شروط
   headline: ڪيٽروبيٽ نيات ۾ ڀليڪار!
@@ -495,9 +503,11 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
-    tag1: Games
+    tag1: Game
     tag2: Animation
     tag3: Story
     tag4: Music

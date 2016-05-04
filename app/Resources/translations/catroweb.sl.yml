@@ -48,6 +48,10 @@ programs:
   updateAppText: Prosimo, posodobite vašo aplikacijo na najnovejšo različico, da boste lahko sneli program.
   btnClosePopup: V redu
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Izbriši
 passwordRecovery:
   subject: Vaše geslo za Catrobat
   message: |
@@ -94,6 +98,10 @@ licenseToPlay:
     item1: delite vaše pecivo skupaj z receptom
     item2: zahvalite se ljudem pri katerih ste našli ideje
   version: Različica 1.1, 2 aprila 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Pogoji uporabe
   headline: Dobrodošli v skupnosti Catrobat!
@@ -493,6 +501,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Igre

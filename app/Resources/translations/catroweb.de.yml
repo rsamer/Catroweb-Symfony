@@ -30,7 +30,7 @@ programs:
     viewed: meist gesehen
     downloaded: meist heruntergeladen
   random: Zufällige Programme
-  related: Related Programs
+  related: Ähnliche Programme
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprogramme
   views: '%views% gesehen'
@@ -106,7 +106,7 @@ licenseToPlay:
 teachers:
   login:
     title: Lehrerbereich
-    description: Dieser Bereich ist für die Verwendung von Lehrern gedacht.
+    description: Dieser Bereich kann von Lehrern verwendet werden.
 termsOfUse:
   title: Nutzungsbedingungen
   headline: Willkommen in der Catrobat Gemeinschaft!
@@ -147,11 +147,7 @@ help:
   stepByStep:
     title: Schrittweise Einführung
     start: 'Ausgangsposition:'
-    description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+    description: Hier kannst du dein erstes Programm, eine interaktive Postkarte, mit Hilfe der folgenden Tutorial Videos erstellen. Bitte folge den Anweisungen die dir gegeben werden. Während der Erstellung der Postkarte werden dir alle Grundlagen von Pocket Code, die du auch für spätere Projekte verwenden kannst, vermittelt. Nach diesem Video hast du das Wissen und die Freiheit dein persönliches Pocket Code Projekt zu erstellen.
     step1:
       title: Erstelle ein neues Program
       detail:
@@ -499,6 +495,8 @@ gamejam:
     header: Achtung
     subheader: Du kannst nur eigene Programme einreichen
     text: 'Erstelle ein eigenes und mach mit beim #AliceGameJam!'
+tag-text: Tags
+extenstion-text: Erweiterungen
 tags:
   constant:
     tag1: Spiele

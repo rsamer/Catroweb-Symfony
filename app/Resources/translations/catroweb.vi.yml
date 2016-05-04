@@ -48,6 +48,10 @@ programs:
   updateAppText: Làm ơn hãy cập nhật ứng dụng của bạn lên phiên bản mới nhất để có thể tải chương trình này.
   btnClosePopup: Đồng ý
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Xóa
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: chia sẻ chiếc bánh của bạn cùng với công thức
     item2: cung cấp bản quyền cho những người đã truyền cảm hứng cho bạn
   version: Phiên bản 1.1, ngày 2 tháng 4 năm 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Điều khoản sử dụng
   headline: Chào mừng đến với cộng đồng Catrobat!
@@ -495,6 +503,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Trò chơi

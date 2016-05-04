@@ -30,7 +30,7 @@ programs:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
   random: ランダム プログラム
-  related: Related Programs
+  related: 関連するプログラム
   downloads: '%downloads% ダウンロード'
   sample: サンプル プログラム
   views: '%views% ビュー'
@@ -48,6 +48,10 @@ programs:
   updateAppText: このプログラムをダウンロードすることができる、最新のバージョンにアプリをアップデートしてください。
   btnClosePopup: Ok
   checkout_this_program: この Catrobat プログラムをチェックアウト
+  show_more: さらに表示する
+  comments: コメント
+  send: 送信
+  delete: 削除
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: レシピと一緒にあなたのケーキを共有します
     item2: あなたがインスパイアされた人のクレジットを入れます
   version: バージョン 1.1、2013/4/2
+teachers:
+  login:
+    title: 教師エリア
+    description: このエリアは教師が使用することができます。
 termsOfUse:
   title: 利用規約
   headline: Catrobat コミュニティへようこそ!
@@ -138,10 +146,9 @@ help:
     title: 順を追って紹介
     start: '開始位置:'
     description: |
-      Here you create your first program, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
+      ここで次のチュートリアル ビデオを使用して、あなたの最初のプログラム、インタラクティブ ポストカードを作成します。与えられた指示に従う必要があります。
+      ポストカードの作成時に、将来のプロジェクトで必要なポケット コードの基本が伝えられます。
+      これらガイドのビデオの後、自由にあなた自身の個人的なポケット コード プロジェクトを作成することなどができるようになります。
     step1:
       title: 新しいプログラムを作成します
       detail:
@@ -495,11 +502,13 @@ gamejam:
     text: |
       独自のプログラムを作成しませんか!
       #AliceGameJam に参加してください
+tag-text: タグ
+extenstion-text: 拡張
 tags:
   constant:
     tag1: ゲーム
     tag2: アニメーションを動かします
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
+    tag3: ストーリー
+    tag4: 音楽
+    tag5: アート
+    tag6: 実験的

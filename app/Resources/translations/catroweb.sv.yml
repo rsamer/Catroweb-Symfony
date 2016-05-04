@@ -48,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Radera
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: Dela dina kakor tillsammans med receptet
     item2: ge kredit till dem som inspirerade dig
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Användarvillkor
   headline: Välkommen till Catrobat gemenskapen!
@@ -495,6 +503,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Spel

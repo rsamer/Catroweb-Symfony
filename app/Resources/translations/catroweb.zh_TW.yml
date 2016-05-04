@@ -48,6 +48,10 @@ programs:
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: 刪除
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -97,6 +101,10 @@ licenseToPlay:
     item1: 分享你的軟體和程式
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: 使用條款
   headline: Welcome to the Catrobat Community!
@@ -495,9 +503,11 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
-    tag1: Games
+    tag1: Game
     tag2: Animation
     tag3: Story
     tag4: Music

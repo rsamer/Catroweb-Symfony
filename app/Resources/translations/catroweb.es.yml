@@ -48,6 +48,10 @@ programs:
   updateAppText: Por favor actualice su aplicación a la versión más reciente para poder descargar este programa.
   btnClosePopup: Está bien
   checkout_this_program: Checkout this Catrobat program
+  show_more: Show More
+  comments: Comments
+  send: Send
+  delete: Borrar
 passwordRecovery:
   subject: Recuperación de su clave Catrobat
   message: |
@@ -101,6 +105,10 @@ licenseToPlay:
     item1: compartir tus tartas con la receta
     item2: dar reconocimiento a aquellos que te han inspirado
   version: Versión 1.1, 02 de abril de 2013
+teachers:
+  login:
+    title: Teachers area
+    description: This area can be used by teachers.
 termsOfUse:
   title: Términos de Uso
   headline: Bienvenido a la comunidad Catrobat!
@@ -502,6 +510,8 @@ gamejam:
     text: |
       But why not create your own!
       Take part in the #AliceGameJam
+tag-text: Tags
+extenstion-text: Extensions
 tags:
   constant:
     tag1: Juegos
