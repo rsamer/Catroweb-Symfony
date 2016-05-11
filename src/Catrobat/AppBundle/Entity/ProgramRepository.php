@@ -214,4 +214,19 @@ class ProgramRepository extends EntityRepository
           ->getQuery()
           ->getResult();
     }
+
+    public function getProgramsByTagId($id, $limit = 20, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('e');
+        return $qb
+            ->select('e')
+            ->leftJoin('e.tags', 'f')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('f.id', ':id'))
+            ->setParameter('id', $id)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

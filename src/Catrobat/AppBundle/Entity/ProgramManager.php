@@ -242,4 +242,9 @@ class ProgramManager
         $this->entity_manager->persist($program);
         $this->entity_manager->flush();
     }
+
+    public function getProgramsByTagId($id, $limit, $offset)
+    {
+        return $this->program_repository->getProgramsByTagId($id, $limit, $offset);
+    }
 }

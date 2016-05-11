@@ -44,12 +44,16 @@
         {% endif %}
       </div>
 
+      {#<a href="{{ url('profile', { id : program.user.id }) }}" class="icon-text">{{ program.user }}</a>#}
+
       {% if  program.tags|length > 0 %}
         <div id="tag-extionsion-container">
           <div id='tags'>
             {{ ("tag-text")|trans({}, "catroweb") }}:
             {% for tag in program.tags %}
-              <button class="btn-tags"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
+              <a href="{{ url('tag_search', { q : tag.id }) }}">
+                <button class="btn-tags"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
+              </a>
             {% endfor %}
           </div>
 
