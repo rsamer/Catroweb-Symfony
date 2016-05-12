@@ -105,6 +105,22 @@ class ProgramRepository extends EntityRepository
 
     public function search($query, $limit = 10, $offset = 0)
     {
+        $em = $this->getEntityManager();
+        $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+        array_shift($metadata);
+
+        $searchterm = '';
+        $i = 1;
+
+        foreach ($metadata as $language) {
+            if ($i == count($metadata)) {
+                $searchterm .= '(t.' . $language . ' LIKE :searchterm)';
+            } else {
+                $searchterm .= '(t.' . $language . ' LIKE :searchterm) OR';
+            }
+            $i++;
+        }
+
         $dql = "SELECT e,
           (CASE
             WHEN (e.name LIKE :searchterm) THEN 10
@@ -121,14 +137,20 @@ class ProgramRepository extends EntityRepository
           (CASE
             WHEN (e.id = :searchtermint) THEN 11
             ELSE 0
+          END) +
+          (CASE
+            WHEN ($searchterm) THEN 7
+            ELSE 0
           END)
           AS weight
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
+        LEFT JOIN e.tags t
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          $searchterm OR
           e.id = :searchtermint) AND
           e.visible = true
         ORDER BY weight DESC, e.uploaded_at DESC
