@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MediaPackageCategory
 {
+  public $file;
+  public $removed_id;
+  public $old_extension;
+
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -28,14 +32,24 @@ class MediaPackageCategory
   protected $package;
 
   /**
-   * @ORM\OneToMany(targetEntity="MediaPackageFile", mappedBy="category")
+   * @ORM\ManyToMany(targetEntity="MediaPackageFile", mappedBy="category")
    */
   protected $files;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  protected $extension;
 
   /**
    * @ORM\Column(type="integer")
    */
   protected $priority = 0;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  protected $title_image_or_both = 0;
 
   /**
    * @return mixed
@@ -124,6 +138,86 @@ class MediaPackageCategory
   public function setPriority($priority)
   {
     $this->priority = $priority;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRemovedId()
+  {
+    return $this->removed_id;
+  }
+
+  /**
+   * @param mixed $removed_id
+   */
+  public function setRemovedId($removed_id)
+  {
+    $this->removed_id = $removed_id;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getOldExtension()
+  {
+    return $this->old_extension;
+  }
+
+  /**
+   * @param mixed $old_extension
+   */
+  public function setOldExtension($old_extension)
+  {
+    $this->old_extension = $old_extension;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getExtension()
+  {
+    return $this->extension;
+  }
+
+  /**
+   * @param mixed $extension
+   */
+  public function setExtension($extension)
+  {
+    $this->extension = $extension;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getFile()
+  {
+    return $this->file;
+  }
+
+  /**
+   * @param mixed $file
+   */
+  public function setFile($file)
+  {
+    $this->file = $file;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getTitleImageOrBoth()
+  {
+    return $this->title_image_or_both;
+  }
+
+  /**
+   * @param mixed $title_image_or_both
+   */
+  public function setTitleImageOrBoth($title_image_or_both)
+  {
+    $this->title_image_or_both = $title_image_or_both;
   }
 
 }

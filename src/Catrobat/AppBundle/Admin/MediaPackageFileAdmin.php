@@ -26,7 +26,7 @@ class MediaPackageFileAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Name'))
             ->add('file', 'file', $file_options)
-            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory', 'required' => true))
+            ->add('category', 'entity', array('class' => 'Catrobat\AppBundle\Entity\MediaPackageCategory', 'required' => true, 'multiple' => true))
             ->add('flavor', 'text', array('required' => false))
             ->add('active', null, array('required' => false))
             ;

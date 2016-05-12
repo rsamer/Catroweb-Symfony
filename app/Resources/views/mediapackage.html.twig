@@ -8,9 +8,17 @@
 
   {% for category in categories %}
     <div>
-      <h1>{{ category.name }}</h1>
+      {% if category.titleorimage != 1 %}
+        <h1>{{ category.name }}</h1>
+      {% endif %}
+      {% set category_image = getMediaPackageCategoryImageUrl(category.image) %}
+      {% if category.titleorimage != 0 %}
+        {% if category_image %}
+          <br>
+          <img src="{{ asset(category_image) }}">
+        {% endif %}
+      {% endif %}
       <div class="programs">
-
         {% for file in category.files %}
           {% set sound = getMediaPackageSoundUrl(file.data) %}
           {% set image = getMediaPackageImageUrl(file.data) %}

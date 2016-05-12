@@ -38,6 +38,7 @@ class AppExtension extends \Twig_Extension
             'isWebview' => new \Twig_Function_Method($this, 'isWebview'),
             'checkCatrobatLanguage' => new \Twig_Function_Method($this, 'checkCatrobatLanguage'),
             'getLanguageOptions' => new \Twig_Function_Method($this, 'getLanguageOptions'),
+            'getMediaPackageCategoryImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageCategoryImageUrl'),
             'getMediaPackageImageUrl' => new \Twig_Function_Method($this, 'getMediaPackageImageUrl'),
             'getMediaPackageSoundUrl' => new \Twig_Function_Method($this, 'getMediaPackageSoundUrl'),
             'flavor' => new \Twig_Function_Method($this, 'getFlavor'),
@@ -170,6 +171,25 @@ class AppExtension extends \Twig_Extension
     public function getTheme()
     {
         return $this->theme->getName();
+    }
+
+    /**
+     *
+     * @param $object MediaPackageCategory
+     * @return null|string
+     */
+    public function getMediaPackageCategoryImageUrl($object)
+    {
+        switch ($object->getExtension()) {
+            case "jpg":
+            case "jpeg":
+            case "png":
+            case "gif":
+                return $this->mediapackage_file_repository->getWebPath("category-" . $object->getId(), $object->getExtension());
+                break;
+            default:
+                return null;
+        }
     }
 
     /**

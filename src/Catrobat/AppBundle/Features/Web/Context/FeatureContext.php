@@ -751,6 +751,9 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_category->setName($category['name']);
       $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
       $new_category->setPackage($package);
+      $new_category->setExtension($category['extension']);
+      $new_category->setPriority($category['priority']);
+      $new_category->setTitleImageOrBoth($category['title_or_image']);
       $em->persist($new_category);
     }
     $em->flush();
@@ -775,7 +778,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
       $new_file->setExtension($file['extension']);
       $new_file->setActive($file['active']);
       $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(array('name' => $file['category']));
-      $new_file->setCategory($category);
+      $new_file->setCategory(array($category));
 
       $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR.$file['id'].'.'.$file['extension']), $file['id'], $file['extension']);
 

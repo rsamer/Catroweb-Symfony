@@ -447,8 +447,10 @@ class DefaultController extends Controller
       }
       $categories[] = array(
         'name' => $category->getName(),
+        'image' => $category,
         'files' => $files,
-        'priority' => $category->getPriority()
+        'priority' => $category->getPriority(),
+        'titleorimage' => $category->getTitleImageOrBoth()
       );
     }
 
@@ -457,7 +459,7 @@ class DefaultController extends Controller
         return 0;
       return ($a['priority'] > $b['priority']) ? -1 : 1;
     });
-
+      
     return $this->get('templating')->renderResponse('::mediapackage.html.twig', array(
       'categories' => $categories
     ));

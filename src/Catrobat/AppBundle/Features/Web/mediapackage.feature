@@ -11,10 +11,11 @@ Feature:
       | 1  | Looks   | looks    |
       | 2  | Sounds  | sounds   |
     And there are mediapackage categories:
-      | id | name    | package |
-      | 1  | Animals | Looks   |
-      | 2  | Fantasy | Sounds  |
-      | 3  | Bla     | Looks   |
+      | id | name    | package | extension | priority | title_or_image |
+      | 1  | Animals | Looks   | jpeg      | 0        | 0              |
+      | 2  | Fantasy | Sounds  | jpeg      | 0        | 0              |
+      | 3  | Bla     | Looks   | jpeg      | 0        | 1              |
+      | 4  | FunFun  | Looks   | jpeg      | 0        | 2              |
 
     And there are mediapackage files:
       | id | name       | category | extension | active | file   | flavor                   |
@@ -44,3 +45,9 @@ Feature:
       And I should see media file with id "5"
       And I should see media file with id "6"
       But I should not see media file with id "4"
+
+    Scenario: Some categories have a title, some just an image, some both
+      Given I am on "/pocketcode/media-library/looks"
+      Then I should see "Animals"
+      And I should see "FunFun"
+      But I should not see "Bla"

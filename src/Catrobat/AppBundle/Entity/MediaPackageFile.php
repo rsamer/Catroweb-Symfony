@@ -37,7 +37,7 @@ class MediaPackageFile
   protected $url;
 
   /**
-   * @ORM\ManyToOne(targetEntity="MediaPackageCategory", inversedBy="files")
+   * @ORM\ManyToMany(targetEntity="MediaPackageCategory", inversedBy="files")
    */
   protected $category;
 
