@@ -31,10 +31,23 @@ class MediaPackageController extends Controller
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
 
+    $package_categories = $package->getCategories();
+    if ( count($package_categories) === 0 ) {
+      $package_categories = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')
+        ->findBy(array('package' => $package));
+    }
+
     $categories = array();
-    foreach($package->getCategories() as $category) {
+    foreach($package_categories as $category) {
       $files = array();
-      foreach($category->getFiles() as $file) {
+
+      $category_files = $category->getFiles();
+      if ( count($category_files) === 0 ) {
+        $category_files = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageFile')
+          ->findBy(array('category' => $category, 'active' => true));
+      }
+
+      foreach($category_files as $file) {
         $flavors_arr = preg_replace("/ /", "", $file->getFlavor());
         $flavors_arr = explode(",", $flavors_arr);
         if(!$file->getActive() || ($file->getFlavor() != null && !in_array($flavor, $flavors_arr))) {
@@ -47,11 +60,14 @@ class MediaPackageController extends Controller
           'url' => $mediapackageFileRepository->getWebPath($file->getId(), $file->getExtension())
         );
       }
-      $categories[] = array(
-        'name' => $category->getName(),
-        'files' => $files,
-        'priority' => $category->getPriority()
-      );
+
+      if ( count($category_files) > 0 ) {
+        $categories[] = array(
+          'name' => $category->getName(),
+          'files' => $files,
+          'priority' => $category->getPriority()
+        );
+      }
     }
 
     usort($categories, function($a,$b) {

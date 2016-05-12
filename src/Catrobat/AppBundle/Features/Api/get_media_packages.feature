@@ -37,22 +37,22 @@ Feature: Get media package files
             {
               "id":1,
               "name":"Dog",
-              "url":"resources\/mediapackage\/1.png"
+              "url":"resources_test\/mediapackage\/1.png"
             },
             {
               "id":4,
               "name":"SexyFlavor",
-              "url":"resources\/mediapackage\/4.png"
+              "url":"resources_test\/mediapackage\/4.png"
             },
             {
               "id":5,
               "name":"SexyNULL",
-              "url":"resources\/mediapackage\/5.png"
+              "url":"resources_test\/mediapackage\/5.png"
             },
             {
               "id":6,
               "name":"SexyWolfi",
-              "url":"resources\/mediapackage\/6.png"
+              "url":"resources_test\/mediapackage\/6.png"
             }
           ],
         "priority":0

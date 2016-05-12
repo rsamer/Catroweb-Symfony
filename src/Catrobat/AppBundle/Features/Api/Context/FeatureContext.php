@@ -1094,7 +1094,7 @@ class FeatureContext extends BaseContext
          * @var $em EntityManager
          */
 
-        $em = $this->getSymfonySupport()->getManager();
+        $em = $this->getManager();
         $packages = $table->getHash();
         foreach($packages as $package) {
             $new_package = new MediaPackage();
@@ -1113,7 +1113,7 @@ class FeatureContext extends BaseContext
         /**
          * @var $em EntityManager
          */
-        $em = $this->getSymfonySupport()->getManager();
+        $em = $this->getManager();
         $categories = $table->getHash();
         foreach($categories as $category) {
             $new_category = new MediaPackageCategory();
@@ -1134,7 +1134,8 @@ class FeatureContext extends BaseContext
          * @var $em EntityManager
          * @var $file_repo MediaPackageFileRepository
          */
-        $em = $this->getSymfonySupport()->getManager();
+        $this->getProgramManger()->findAll();
+        $em = $this->getManager();
         $file_repo = $this->getSymfonySupport()->getMediaPackageFileRepository();
         $files = $table->getHash();
         foreach($files as $file) {
@@ -1150,6 +1151,7 @@ class FeatureContext extends BaseContext
 
             $em->persist($new_file);
         }
+
         $em->flush();
     }
 
