@@ -457,8 +457,6 @@ class FeatureContext extends BaseContext
     public function iShouldGetTheJsonObject(PyStringNode $string)
     {
         $response = $this->getClient()->getResponse();
-        echo $response->getContent();
-        exit();
         assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
     }
 
