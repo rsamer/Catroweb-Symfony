@@ -2,6 +2,8 @@
 namespace Catrobat\AppBundle\Features\Api\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Catrobat\AppBundle\Entity\MediaPackage;
+use Catrobat\AppBundle\Entity\MediaPackageFile;
 use Catrobat\AppBundle\Entity\ProgramDownloads;
 use Catrobat\AppBundle\Entity\ProgramDownloadsRepository;
 use Catrobat\AppBundle\Entity\RudeWord;
@@ -12,6 +14,7 @@ use Catrobat\AppBundle\Entity\User;
 use Catrobat\AppBundle\Entity\Program;
 use Catrobat\AppBundle\Services\TestEnv\LdapTestDriver;
 use DateTime;
+use Catrobat\AppBundle\Entity\MediaPackageCategory;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Catrobat\AppBundle\Entity\FeaturedProgram;
@@ -41,6 +44,8 @@ class FeatureContext extends BaseContext
 
     private $secure;
 
+    private $kernel;
+
     /**
      * @var $program_downloads_repository ProgramDownloadsRepository
      */
@@ -49,6 +54,9 @@ class FeatureContext extends BaseContext
     private $fb_post_program_id;
 
     private $fb_post_id;
+
+
+    const MEDIAPACKAGE_DIR = './testdata/DataFixtures/MediaPackage/';
 
     /**
      * Initializes context with parameters from behat.yml.
@@ -449,6 +457,8 @@ class FeatureContext extends BaseContext
     public function iShouldGetTheJsonObject(PyStringNode $string)
     {
         $response = $this->getClient()->getResponse();
+        echo $response->getContent();
+        exit();
         assertJsonStringEqualsJsonString($string->getRaw(), $response->getContent(), '');
     }
 
@@ -1075,5 +1085,84 @@ class FeatureContext extends BaseContext
         $string = print_r($fb_response, true);
         assertNotContains('id', $string, 'Facebook ID was returned, but should not exist anymore as the post was deleted');
         assertNotContains('message', $string, 'Facebook message was returned, but should not exist anymore as the post was deleted');
+    }
+
+    /**
+     * @Given /^there are mediapackages:$/
+     */
+    public function thereAreMediapackages(TableNode $table)
+    {
+        /**
+         * @var $em EntityManager
+         */
+
+        $em = $this->getSymfonySupport()->getManager();
+        $packages = $table->getHash();
+        foreach($packages as $package) {
+            $new_package = new MediaPackage();
+            $new_package->setName($package['name']);
+            $new_package->setNameUrl($package['name_url']);
+            $em->persist($new_package);
+        }
+        $em->flush();
+    }
+
+    /**
+     * @Given /^there are mediapackage categories:$/
+     */
+    public function thereAreMediapackageCategories(TableNode $table)
+    {
+        /**
+         * @var $em EntityManager
+         */
+        $em = $this->getSymfonySupport()->getManager();
+        $categories = $table->getHash();
+        foreach($categories as $category) {
+            $new_category = new MediaPackageCategory();
+            $new_category->setName($category['name']);
+            $package = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackage')->findOneBy(array('name' => $category['package']));
+            $new_category->setPackage($package);
+            $em->persist($new_category);
+        }
+        $em->flush();
+    }
+
+    /**
+     * @Given /^there are mediapackage files:$/
+     */
+    public function thereAreMediapackageFiles(TableNode $table)
+    {
+        /**
+         * @var $em EntityManager
+         * @var $file_repo MediaPackageFileRepository
+         */
+        $em = $this->getSymfonySupport()->getManager();
+        $file_repo = $this->getSymfonySupport()->getMediaPackageFileRepository();
+        $files = $table->getHash();
+        foreach($files as $file) {
+            $new_file = new MediaPackageFile();
+            $new_file->setName($file['name']);
+            $new_file->setDownloads(0);
+            $new_file->setExtension($file['extension']);
+            $new_file->setActive($file['active']);
+            $category = $em->getRepository('\Catrobat\AppBundle\Entity\MediaPackageCategory')->findOneBy(array('name' => $file['category']));
+            $new_file->setCategory($category);
+
+            $file_repo->saveMediaPackageFile(new File(self::MEDIAPACKAGE_DIR.$file['id'].'.'.$file['extension']), $file['id'], $file['extension']);
+
+            $em->persist($new_file);
+        }
+        $em->flush();
+    }
+
+    /**
+     * @When /^I GET "([^"]*)"$/
+     */
+    public function iGet($url)
+    {
+        $this->getClient()->request('GET', $url, array(), $this->files, array(
+          'HTTP_HOST' => $this->hostname,
+          'HTTPS' => $this->secure
+        ));
     }
 }
