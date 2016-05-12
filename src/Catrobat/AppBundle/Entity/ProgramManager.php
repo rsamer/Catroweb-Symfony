@@ -247,4 +247,9 @@ class ProgramManager
     {
         return $this->program_repository->getProgramsByTagId($id, $limit, $offset);
     }
+
+    public function searchTagAndExtensionCount($query)
+    {
+        return $this->program_repository->searchTagAndExtensionCount($query);
+    }
 }

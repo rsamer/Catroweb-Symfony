@@ -116,7 +116,7 @@ class ProgramRepository extends EntityRepository
             if ($i == count($metadata)) {
                 $searchterm .= '(t.' . $language . ' LIKE :searchterm)';
             } else {
-                $searchterm .= '(t.' . $language . ' LIKE :searchterm) OR';
+                $searchterm .= '(t.' . $language . ' LIKE :searchterm) OR ';
             }
             $i++;
         }
@@ -168,23 +168,51 @@ class ProgramRepository extends EntityRepository
 
     public function searchCount($query)
     {
+
+        $em = $this->getEntityManager();
+        $metadata = $em->getClassMetadata('Catrobat\AppBundle\Entity\Tag')->getFieldNames();
+        array_shift($metadata);
+
+        $searchterm = '';
+        foreach ($metadata as $language) {
+            $searchterm .= 't.' . $language . ' LIKE :searchterm OR ';
+        }
+
         $qb_program = $this->createQueryBuilder('e');
-        $dql = "SELECT COUNT(e.id)
+        $dql = "SELECT e.id
         FROM Catrobat\AppBundle\Entity\Program e
         LEFT JOIN e.user f
+        LEFT JOIN e.tags t
         WHERE
           (e.name LIKE :searchterm OR
           f.username LIKE :searchterm OR
           e.description LIKE :searchterm OR
+          $searchterm
           e.id = :searchtermint) AND
           e.visible = true
+          GROUP BY e.id
       ";
         $q2 = $qb_program->getEntityManager()->createQuery($dql);
         $q2->setParameter('searchterm', '%'.$query.'%');
         $q2->setParameter('searchtermint', intval($query));
-        $result = $q2->getSingleScalarResult();
+        $result = $q2->getResult();
+        return count($result);
+    }
 
-        return $result;
+    public function searchTagAndExtensionCount($query)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        $result = $qb
+            ->select('e')
+            ->leftJoin('e.tags', 't')
+            ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
+            ->andWhere($qb->expr()->eq('t.id', ':id'))
+            ->setParameter('id', $query)
+            ->getQuery()
+            ->getResult();
+
+        return count($result);
     }
 
     public function getUserPrograms($user_id)
