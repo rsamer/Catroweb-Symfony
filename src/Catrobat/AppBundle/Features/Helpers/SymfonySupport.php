@@ -275,6 +275,15 @@ class SymfonySupport
         $program->setDirectoryHash(isset($config['directory_hash']) ?$config['directory_hash']: null);
         $program->setAcceptedForGameJam(isset($config['accepted']) ? $config['accepted'] : false);
         $program->setGamejam(isset($config['gamejam']) ? $config['gamejam'] : null);
+
+        if ($config['tags'] != null) {
+            $tags = explode(',', $config['tags']);
+            foreach ($tags as $tag_id) {
+                $tag = $this->getTagRepository()->find($tag_id);
+                $program->addTag($tag);
+            }
+        }
+
         $em->persist($program);
         
         $user->addProgram($program);

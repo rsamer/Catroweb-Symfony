@@ -301,6 +301,7 @@ class FeatureContext extends BaseContext
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
                 'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
                 'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
+                'tags' => isset($programs[$i]['tags']) ? $programs[$i]['tags'] : null,
             );
             
             $this->insertProgram($user, $config);
@@ -378,6 +379,14 @@ class FeatureContext extends BaseContext
      * @Given /^I have a parameter "([^"]*)" with value "([^"]*)"$/
      */
     public function iHaveAParameterWithValue($name, $value)
+    {
+        $this->request_parameters[$name] = $value;
+    }
+
+    /**
+     * @Given /^I have a parameter "([^"]*)" with the tag id "([^"]*)"$/
+     */
+    public function iHaveAParameterWithTheTagId($name, $value)
     {
         $this->request_parameters[$name] = $value;
     }
