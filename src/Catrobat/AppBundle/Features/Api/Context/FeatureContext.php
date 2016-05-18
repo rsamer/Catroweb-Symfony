@@ -301,7 +301,7 @@ class FeatureContext extends BaseContext
                 'visible' => isset($programs[$i]['visible']) ? $programs[$i]['visible'] == 'true' : true,
                 'remixof' => isset($programs[$i]['RemixOf']) ? $program_manager->find($programs[$i]['RemixOf']) : null,
                 'approved' => (isset($programs[$i]['approved_by_user']) && $programs[$i]['approved_by_user'] == '') ? null : true,
-                'tags' => isset($programs[$i]['tags']) ? $programs[$i]['tags'] : null,
+                'tags' => isset($programs[$i]['tags_id']) ? $programs[$i]['tags_id'] : null,
             );
             
             $this->insertProgram($user, $config);

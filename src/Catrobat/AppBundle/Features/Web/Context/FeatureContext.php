@@ -408,7 +408,7 @@ class FeatureContext extends MinkContext implements KernelAwareContext, CustomSn
           $program->setApproved(false);
           $program->setFbPostUrl(isset($programs[$i]['fb_post_url']) ? $programs[$i]['fb_post_url'] : '');
 
-          if ($programs[$i]['tags_id'] != null) {
+          if (isset($programs[$i]['tags_id']) && $programs[$i]['tags_id'] != null) {
               $tag_repo = $em->getRepository('AppBundle:Tag');
               $tags = explode(',', $programs[$i]['tags_id']);
               foreach ($tags as $tag_id) {

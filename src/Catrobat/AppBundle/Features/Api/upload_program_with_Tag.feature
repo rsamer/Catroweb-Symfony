@@ -87,3 +87,9 @@ Feature: Upload a program with tag
     And I use the "english" app
     When I upload this program
     Then the program should not be tagged
+
+  Scenario: upload a tagged program with more then three tags
+    Given I have a program with "Games,Story,Music,Art" as tags
+    And I use the "english" app
+    When I upload this program
+    Then the program should be tagged with "Games,Story,Music" in the database
