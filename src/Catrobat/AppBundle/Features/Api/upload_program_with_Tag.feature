@@ -93,3 +93,10 @@ Feature: Upload a program with tag
     And I use the "english" app
     When I upload this program
     Then the program should be tagged with "Games,Story,Music" in the database
+
+  Scenario: update a program with other tags
+    Given I have a program with "Music,Art" as tags
+    And I use the "english" app
+    And I upload this program
+    When I upload this program again with the tags "Games,Story"
+    Then the program should be tagged with "Games,Story" in the database

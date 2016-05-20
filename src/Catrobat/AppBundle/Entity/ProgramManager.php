@@ -64,6 +64,7 @@ class ProgramManager
         $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
         if ($old_program != null) {
             $program = $old_program;
+            $this->removeAllTags($program);
             // it's an update
             $program->incrementVersion();
         } else {
@@ -138,6 +139,17 @@ class ProgramManager
                     break;
             }
         }
+    }
+
+    public function removeAllTags($program)
+    {
+        /* @var $program Program*/
+        $tags = $program->getTags();
+        if ($tags == null)
+            return;
+
+        foreach ($tags as $tag)
+            $program->removeTag($tag);
     }
 
     public function findOneByNameAndUser($program_name, $user)

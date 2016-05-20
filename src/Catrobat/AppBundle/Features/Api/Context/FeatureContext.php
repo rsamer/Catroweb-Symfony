@@ -1178,4 +1178,16 @@ class FeatureContext extends BaseContext
         assertEquals(0, count($program_tags), 'The program is tagged but should not be tagged');
     }
 
+    /**
+     * @When /^I upload this program again with the tags "([^"]*)"$/
+     */
+    public function iUploadThisProgramAgainWithTheTags($tags)
+    {
+        $this->generateProgramFileWith(array(
+            'tags' => $tags
+        ));
+        $this->upload(sys_get_temp_dir() . '/program_generated.catrobat', null, 'pocketcode', $this->request_parameters);
+    }
+
+
 }

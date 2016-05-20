@@ -17,8 +17,21 @@ class TagRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e');
 
         return $qb
-    ->select('e.'.$language)
-    ->getQuery()
-    ->getResult();
+            ->select('e.'.$language)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getTagsWithProgramIdAndLanguage($program_id, $language)
+    {
+        $qb = $this->createQueryBuilder('e');
+
+        return $qb
+            ->select('e.'.$language)
+            ->leftJoin('e.programs', 'p'  )
+            ->andWhere($qb->expr()->eq('p.id', ':id'))
+            ->setParameter('id', $program_id)
+            ->getQuery()
+            ->getResult();
     }
 }
