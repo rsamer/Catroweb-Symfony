@@ -28,7 +28,12 @@ class ExtractedCatrobatFile
         if (! file_exists($base_dir . 'code.xml')) {
             throw new MissingXmlException();
         }
-        
+
+        // dirty workaround for INVALID_XML problems due to invalidly escaped NULL-Terminator in code.xml, May 29, 2016
+        $content = file_get_contents($base_dir . 'code.xml');
+        $content = str_replace('&#x0;', '', $content);
+        file_put_contents($base_dir . 'code.xml', $content);
+
         $this->program_xml_properties = @simplexml_load_file($base_dir . 'code.xml');
         if ($this->program_xml_properties === false) {
             throw new InvalidXmlException();
