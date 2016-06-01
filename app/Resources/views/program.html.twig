@@ -46,8 +46,8 @@
 
       {% if  program.tags|length > 0 %}
         <div id="tag-extionsion-container">
+          <div id="tags-text">{{ ("tag-text")|trans({}, "catroweb") }}:</div>
           <div id='tags'>
-            {{ ("tag-text")|trans({}, "catroweb") }}:
             {% for tag in program.tags %}
               <a href="{{ url('tag_search', { q : tag.id }) }}">
                 <button id={{ tag.en }} class="btn-tags"> {{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</button>
