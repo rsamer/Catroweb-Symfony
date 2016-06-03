@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\EntityListeners({"Catrobat\AppBundle\Listeners\Entity\ProgramListener"})
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program")
+ * @ORM\Table(name="program", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Catrobat\AppBundle\Entity\ProgramRepository")
  */
 class Program
@@ -28,12 +28,12 @@ class Program
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=300)
+     * @ORM\Column(type="string", length=300, options={"collation"="utf8mb4_unicode_ci"})
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", options={"collation"="utf8mb4_unicode_ci"})
      */
     protected $description;
 
