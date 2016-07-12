@@ -53,8 +53,16 @@
         <input class="button" type="submit" value="Create my Account" />
       </div>
       {{ form_rest(form) }}
-    </form>
+      <div>
+        {{ Meldung }}
+      </div>
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+          {{ flashMessage }}
+        </div>
+      {% endfor %}
 
+    </form>
     {% include ':social:oauth_form.html.twig' %}
 
   {% endblock fos_user_content %}

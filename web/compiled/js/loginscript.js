@@ -315,7 +315,6 @@ function getDesiredUsernameGoogle() {
 }
 
 function sendCodeToServer($code, $gplus_id, $username, $email, $locale) {
-
     var $state = $('#csrf_token').val();
     var $ajaxUrl = Routing.generate(
         'catrobat_oauth_login_google_code', {flavor: 'pocketcode'}
